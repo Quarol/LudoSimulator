@@ -34,7 +34,11 @@ public class Simulation {
                 List<Action> possibleActions;
                 do {
                     roll = Dice.roll();
-
+                    List<Action> actions = new ArrayList<>();
+                    actions.add(new TakeOutPawnAction());
+                    actions.add(new MoveActivePawnAction());
+                    actions.add(new MoveEndPawnAction());
+                    actions.add(new KillPawnAction());
                     possibleActions = new ArrayList<>();
 
                     for (Action action : actions) {
@@ -54,7 +58,7 @@ public class Simulation {
                     }
                 } while (roll == 6);
             }
-            }
+        }
         System.out.println();
         System.out.println();
         System.out.println("Nr of displays: " + nrOfMoves);

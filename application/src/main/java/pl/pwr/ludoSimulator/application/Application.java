@@ -18,6 +18,7 @@ public class Application {
         System.out.print("Liczba graczy: ");
         nrOfPLayers = scanner.nextInt();
         System.out.println("\n");*/
+
         nrOfPLayers = 2;
         List<Action> actions = new ArrayList<>();
         actions.add(new TakeOutPawnAction());
