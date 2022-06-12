@@ -2,7 +2,6 @@ package pl.pwr.ludoSimulator.display;
 
 import java.util.ArrayList;
 import java.util.List;
-import pl.pwr.ludoSimulator.logic.Player;
 
 public class BasePositions {
     private final List<DisplayPosition> positions = new ArrayList<>();

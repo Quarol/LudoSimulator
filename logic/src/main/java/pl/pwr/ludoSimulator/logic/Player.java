@@ -24,7 +24,7 @@ public class Player  {
     public int getId() {
         return id;
     }
-    public Player(int id, int startPosition,int endPosition) {
+    public Player(int id, int startPosition, int endPosition) {
         this.id = id;
         this.startPosition = startPosition;
         this.endPosition = endPosition;
