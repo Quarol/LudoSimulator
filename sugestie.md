@@ -36,7 +36,6 @@ Z Eportalu:
 - Zamiast klonowania można użyć konstruktora
 - Poszczególne implementacje interfejsu Pawn niewiele się różnią, w związku z czym są trochę bez sensu
 - Innym podejściem, które być może uprości trochę w kodzie, będzie wprowadzenie obiektu Map<Player, PlayerPawns> pawnsByPlayer np. w klasie logiki symulacji. Dzięki temu Player nie będzie przechowywał pionków, ale logika symulacji już będzie wiedziała (równie dobrze może to być w Board)
-- (int) (Math.random() można by wydzielić do osobnej metody
 
 - metoda start jest wielka - warto ją rozbić na kilka metod, np findPossibleActions(...), która zwracałaby listę akcji, killPawn() etc
 - plus za przypisywanie booleanów do zmiennych - zwiększa to czytelność
