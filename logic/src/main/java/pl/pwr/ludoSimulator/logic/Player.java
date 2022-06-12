@@ -1,13 +1,6 @@
 package pl.pwr.ludoSimulator.logic;
 
-import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
-import pl.pwr.ludoSimulator.logic.pawns.BasePawn;
-import pl.pwr.ludoSimulator.logic.pawns.EndPawn;
-import pl.pwr.ludoSimulator.logic.StartPositions;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Player implements Cloneable {
@@ -19,31 +12,31 @@ public class Player implements Cloneable {
         }
     }
 
-    private List<BasePawn> basePawns = new ArrayList<>();
-    private final List<ActivePawn> activePawns = new ArrayList<>();
-    private final List<EndPawn> endPawns = new ArrayList<>();
+    private List<Pawn> basePawns = new ArrayList<>();
+    private final List<Pawn> activePawns = new ArrayList<>();
+    private final List<Pawn> endPawns = new ArrayList<>();
 
     public boolean hasEnded() {
         return endPawns.size() == 4;
     }
 
-    public List<EndPawn> getEndPawns() {
+    public List<Pawn> getEndPawns() {
         return endPawns;
     }
 
-    public List<BasePawn> getBasePawns() {
+    public List<Pawn> getBasePawns() {
         return basePawns;
     }
 
-    public void setBasePawns(List<BasePawn> basePawns) {
+    public void setBasePawns(List<Pawn> basePawns) {
         this.basePawns = basePawns;
     }
 
-    public ActivePawn getActivePawn(int index) {
+    public Pawn getActivePawn(int index) {
         return activePawns.get(index);
     }
 
-    public List<ActivePawn> getActivePawns() {
+    public List<Pawn> getActivePawns() {
         return activePawns;
     }
 
@@ -59,19 +52,19 @@ public class Player implements Cloneable {
         return endPosition;
     }
 
-    public void addActivePawn(ActivePawn pawn) {
+    public void addActivePawn(Pawn pawn) {
         this.activePawns.add(pawn);
     }
 
-    public void addEndPawn(EndPawn pawn) {
+    public void addEndPawn(Pawn pawn) {
         this.endPawns.add(pawn);
     }
 
-    public void addBasePawn(BasePawn pawn) {
+    public void addBasePawn(Pawn pawn) {
         this.basePawns.add(pawn);
     }
 
-    public void removeActivePawn(ActivePawn pawn) {
+    public void removeActivePawn(Pawn pawn) {
         this.activePawns.remove(pawn);
     }
 
@@ -90,9 +83,9 @@ public class Player implements Cloneable {
         Player.counter++;
         this.startPosition = StartPositions.values()[this.id].getStartPosition();
         this.endPosition = Math.floorMod(startPosition-1, 40);
-        this.basePawns.add(new BasePawn());
-        this.basePawns.add(new BasePawn());
-        this.basePawns.add(new BasePawn());
-        this.basePawns.add(new BasePawn());
+        this.basePawns.add(new Pawn());
+        this.basePawns.add(new Pawn());
+        this.basePawns.add(new Pawn());
+        this.basePawns.add(new Pawn());
     }
 }

@@ -1,11 +1,9 @@
 package pl.pwr.ludoSimulator.application;
 
 import org.junit.jupiter.api.Test;
-import java.util.List;
 import pl.pwr.ludoSimulator.display.Display;
 import pl.pwr.ludoSimulator.logic.BoardInitializer;
 import pl.pwr.ludoSimulator.logic.actions.*;
-import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
 import pl.pwr.ludoSimulator.logic.Board;
 import pl.pwr.ludoSimulator.logic.Dice;
 import pl.pwr.ludoSimulator.logic.Player;

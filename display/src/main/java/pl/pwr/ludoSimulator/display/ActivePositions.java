@@ -1,8 +1,9 @@
 package pl.pwr.ludoSimulator.display;
 
+import pl.pwr.ludoSimulator.logic.Pawn;
+
 import java.util.ArrayList;
 import java.util.List;
-import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
 
 public class ActivePositions {
     private final List<DisplayPosition> positions = new ArrayList<>();
@@ -98,7 +99,7 @@ public class ActivePositions {
     public DisplayPosition get (int index) {
         return this.positions.get(index);
     }
-    public DisplayPosition get (ActivePawn pawn) {
+    public DisplayPosition get (Pawn pawn) {
         return this.positions.get(pawn.getPosition());
     }
 }

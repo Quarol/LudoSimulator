@@ -2,7 +2,7 @@ package pl.pwr.ludoSimulator.simulation;
 
 import pl.pwr.ludoSimulator.logic.*;
 import pl.pwr.ludoSimulator.logic.actions.*;
-import pl.pwr.ludoSimulator.logic.pawns.Pawn;
+import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.display.Display;
 
 import java.util.ArrayList;

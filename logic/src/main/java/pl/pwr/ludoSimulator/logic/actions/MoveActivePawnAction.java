@@ -1,9 +1,7 @@
 package pl.pwr.ludoSimulator.logic.actions;
 
 import pl.pwr.ludoSimulator.logic.Board;
-import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
-import pl.pwr.ludoSimulator.logic.pawns.EndPawn;
-import pl.pwr.ludoSimulator.logic.pawns.Pawn;
+import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.logic.Player;
 
 import java.util.ArrayList;
@@ -26,15 +24,15 @@ public class MoveActivePawnAction implements Action {
         this.player = player;
         this.steps = roll;
         this.board = board;
-        for (EndPawn pawn : player.getEndPawns()) {
+        for (Pawn pawn : player.getEndPawns()) {
             this.usedEndPositions.add(pawn.getPosition());
         }
         List<Integer> usedPositions = new ArrayList<>();
         List<Pawn> activePawnsWhichCanMove = new ArrayList<>();
-        for (ActivePawn pawn : player.getActivePawns()) {
+        for (Pawn pawn : player.getActivePawns()) {
             usedPositions.add(pawn.getPosition());
         }
-        for (ActivePawn pawn : player.getActivePawns()) {
+        for (Pawn pawn : player.getActivePawns()) {
             if (!usedPositions.contains((pawn.getPosition() + roll) % 40)) {
                 if (pawn.getPosition() + roll < player.getEndPosition()) {
                     activePawnsWhichCanMove.add(pawn);
@@ -58,8 +56,8 @@ public class MoveActivePawnAction implements Action {
             pawn.setPosition((pawn.getPosition()+steps)%40);
         } else if (pawn.getPosition() < endPosition && pawn.getPosition()+steps > endPosition) {
             if (pawn.getPosition()+steps-endPosition < 5 && !this.usedEndPositions.contains(pawn.getPosition()+steps-endPosition-1)) {
-                this.player.removeActivePawn((ActivePawn) pawn);
-                this.player.addEndPawn(new EndPawn(pawn.getPosition()+steps-endPosition-1));
+                this.player.removeActivePawn(pawn);
+                this.player.addEndPawn(new Pawn(pawn.getPosition()+steps-endPosition-1));
             }
         }
         return this.board;

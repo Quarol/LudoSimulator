@@ -1,8 +1,5 @@
 package pl.pwr.ludoSimulator.logic;
 
-import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
-import pl.pwr.ludoSimulator.logic.pawns.BasePawn;
-
 import java.util.ArrayList;
 import java.util.List;
 

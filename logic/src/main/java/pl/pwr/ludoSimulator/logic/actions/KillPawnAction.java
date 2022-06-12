@@ -1,8 +1,6 @@
 package pl.pwr.ludoSimulator.logic.actions;
 
-import pl.pwr.ludoSimulator.logic.Board;
-import pl.pwr.ludoSimulator.logic.pawns.*;
-import pl.pwr.ludoSimulator.logic.Player;
+import pl.pwr.ludoSimulator.logic.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +21,12 @@ public class KillPawnAction implements Action{
         List<Pawn> activePawnsWhichCanKill = new ArrayList<>();
         for (Player p : board.getPlayers()) {
             if (p.getId() != player.getId()) {
-                for (ActivePawn pawn : p.getActivePawns()) {
+                for (Pawn pawn : p.getActivePawns()) {
                     otherPlayersUsedPositions.add(pawn.getPosition());
                 }
             }
         }
-        for (ActivePawn pawn : player.getActivePawns()) {
+        for (Pawn pawn : player.getActivePawns()) {
             if (!usedPositions.contains((pawn.getPosition() + roll) % 40) && otherPlayersUsedPositions.contains((pawn.getPosition() + roll) % 40)) {
                 if (pawn.getPosition() + roll < player.getEndPosition()) {
                     activePawnsWhichCanKill.add(pawn);
@@ -51,10 +49,10 @@ public class KillPawnAction implements Action{
         if (pawn.getPosition()+steps < endPosition || pawn.getPosition() > endPosition) {
             int position = (pawn.getPosition()+steps)%40;
             for (Player player : board.getActivePlayers()) {
-                for (ActivePawn p : player.getActivePawns()) {
+                for (Pawn p : player.getActivePawns()) {
                     if (p.getPosition() == position) {
                         player.removeActivePawn(p);
-                        player.addBasePawn(new BasePawn());
+                        player.addBasePawn(new Pawn());
                         break;
                     }
                 }
