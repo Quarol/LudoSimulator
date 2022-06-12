@@ -29,16 +29,9 @@ public class Simulation {
         while (board.getActivePlayers().size() > 1) {
             for (Player player : board.getActivePlayers()) {
                 int roll;
-                List<Action> possibleActions;
                 do {
                     roll = Dice.roll();
-                    possibleActions = new ArrayList<>();
-
-                    for (Action action : actions) {
-                        if (action.isPossible(board, player, roll))
-                            possibleActions.add(action);
-                    }
-
+                    List<Action> possibleActions = findPossibleActions(board, player, roll);
                     boolean wasActionAccomplished =  (possibleActions.size() != 0);
                     if (wasActionAccomplished) {
                         int actionToExecute = random() * possibleActions.size();
@@ -53,5 +46,13 @@ public class Simulation {
         System.out.println();
         System.out.println();
         System.out.println("Nr of displays: " + nrOfMoves);
+    }
+    private List<Action> findPossibleActions (Board board, Player player, int roll) {
+        List <Action> possibleActions = new ArrayList<>();
+        for (Action action : actions) {
+            if (action.isPossible(board, player, roll))
+                possibleActions.add(action);
+        }
+        return possibleActions;
     }
 }

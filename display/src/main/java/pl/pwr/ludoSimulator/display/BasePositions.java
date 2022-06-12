@@ -39,13 +39,6 @@ public class BasePositions {
             this.generatePositions(i);
         }
     }
-    /*public List<DisplayPosition> getPositions (int playerId) {
-        return List.of(this.positions.get((playerId)*4), this.positions.get((playerId)*4+1), this.positions.get((playerId)*4+2), this.positions.get((playerId)*4+3));
-    }
-    public List<DisplayPosition> getPositions (Player player) {
-        int playerId = player.getId();
-        return List.of(this.positions.get((playerId)*4), this.positions.get((playerId)*4+1), this.positions.get((playerId)*4+2), this.positions.get((playerId)*4+3));
-    }*/
     public DisplayPosition getPosition (int playerId, int pawnPosition) {
         return positions.get(playerId*4+pawnPosition);
     }

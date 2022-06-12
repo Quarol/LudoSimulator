@@ -11,15 +11,16 @@ import java.util.Scanner;
 
 public class Application {
     public static void main (String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int nrOfPLayers;
 
-        /*System.out.println("Wpisz dane do symulacji");
+        /*
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wpisz dane do symulacji");
         System.out.print("Liczba graczy: ");
         nrOfPLayers = scanner.nextInt();
-        System.out.println("\n");*/
+        System.out.println("\n");
+        int nrOfPLayers;
+        */
 
-        nrOfPLayers = 2;
         List<Action> actions = new ArrayList<>();
         actions.add(new TakeOutPawnAction());
         actions.add(new MoveActivePawnAction());

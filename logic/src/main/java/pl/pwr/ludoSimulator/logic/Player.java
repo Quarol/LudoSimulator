@@ -32,10 +32,6 @@ public class Player implements Cloneable {
         this.basePawns = basePawns;
     }
 
-    public Pawn getActivePawn(int index) {
-        return activePawns.get(index);
-    }
-
     public List<Pawn> getActivePawns() {
         return activePawns;
     }
@@ -72,7 +68,7 @@ public class Player implements Cloneable {
         this.basePawns.remove(basePawns.get(0));
     }
 
-    private int endPosition;
+    private final int endPosition;
 
     public int getId() {
         return id;
