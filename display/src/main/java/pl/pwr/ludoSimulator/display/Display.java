@@ -51,13 +51,13 @@ public class Display {
     private void renderDisplay () {
         this.renderNewDisplay();
         for (Player player : board.getPlayers()) {
-            for (int i = 0; i < player.getBasePawns().size(); i++) {
+            for (int i = 0; i < board.getPlayerPawns(player).getBasePawns().size(); i++) {
                 setDisplayTableField(basePositions.getPosition(player.getId()+1, i), player.getId()+1);
             }
-            for (Pawn pawn : player.getEndPawns()) {
+            for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
                 setDisplayTableField(endPositions.getPosition(player, pawn), player.getId()+1);
             }
-            for (Pawn pawn : player.getActivePawns()) {
+            for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
                 setDisplayTableField(activePositions.get(pawn), player.getId()+1);
             }
         }

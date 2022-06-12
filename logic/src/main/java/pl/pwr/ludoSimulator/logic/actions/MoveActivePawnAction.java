@@ -10,15 +10,15 @@ import java.util.List;
 public class MoveActivePawnAction implements Action {
     private List<Pawn> getPawns(Board board, Player player, int roll) {
         List<Integer> usedEndPositions = getUsedEndPositions(board, player);
-        for (Pawn pawn : player.getEndPawns()) {
+        for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
             usedEndPositions.add(pawn.getPosition());
         }
         List<Integer> usedPositions = new ArrayList<>();
         List<Pawn> activePawnsWhichCanMove = new ArrayList<>();
-        for (Pawn pawn : player.getActivePawns()) {
+        for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
             usedPositions.add(pawn.getPosition());
         }
-        for (Pawn pawn : player.getActivePawns()) {
+        for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
             if (!usedPositions.contains((pawn.getPosition() + roll) % 40)) {
                 if (pawn.getPosition() + roll < player.getEndPosition()) {
                     activePawnsWhichCanMove.add(pawn);
@@ -36,7 +36,7 @@ public class MoveActivePawnAction implements Action {
 
     private List<Integer> getUsedEndPositions (Board board, Player player) {
         List<Integer> usedEndPositions = new ArrayList<>();
-        for (Pawn pawn : player.getEndPawns()) {
+        for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
             usedEndPositions.add(pawn.getPosition());
         }
         return usedEndPositions;
@@ -55,8 +55,8 @@ public class MoveActivePawnAction implements Action {
             pawn.setPosition((pawn.getPosition()+roll)%40);
         } else if (pawn.getPosition() < endPosition && pawn.getPosition()+roll > endPosition) {
             if (pawn.getPosition()+roll-endPosition < 5 && !usedEndPositions.contains(pawn.getPosition()+roll-endPosition-1)) {
-                player.removeActivePawn(pawn);
-                player.addEndPawn(new Pawn(pawn.getPosition()+roll-endPosition-1));
+                board.getPlayerPawns(player).removeActivePawn(pawn);
+                board.getPlayerPawns(player).addEndPawn(new Pawn(pawn.getPosition()+roll-endPosition-1));
             }
         }
         return board;

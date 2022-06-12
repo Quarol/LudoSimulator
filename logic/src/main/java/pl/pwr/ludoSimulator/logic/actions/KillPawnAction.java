@@ -14,14 +14,14 @@ public class KillPawnAction implements Action {
         List<Integer> usedPositions = new ArrayList<>();
         List<Integer> otherPlayersUsedPositions = new ArrayList<>();
         List<Pawn> activePawnsWhichCanKill = new ArrayList<>();
-        for (Player p : board.getPlayers()) {
-            if (p.getId() != player.getId()) {
-                for (Pawn pawn : p.getActivePawns()) {
+        for (Player currentPlayer : board.getPlayers()) {
+            if (currentPlayer.getId() != player.getId()) {
+                for (Pawn pawn : board.getPlayerPawns(currentPlayer).getActivePawns()) {
                     otherPlayersUsedPositions.add(pawn.getPosition());
                 }
             }
         }
-        for (Pawn pawn : player.getActivePawns()) {
+        for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
             if (!usedPositions.contains((pawn.getPosition() + roll) % 40) && otherPlayersUsedPositions.contains((pawn.getPosition() + roll) % 40)) {
                 if (pawn.getPosition() + roll < player.getEndPosition()) {
                     activePawnsWhichCanKill.add(pawn);
@@ -42,10 +42,10 @@ public class KillPawnAction implements Action {
             if (pawn.getPosition()+roll < endPosition || pawn.getPosition() > endPosition) {
                 int position = (pawn.getPosition()+roll)%40;
                 for (Player currentPlayer : board.getActivePlayers()) {
-                    for (Pawn p : currentPlayer.getActivePawns()) {
+                    for (Pawn p : board.getPlayerPawns(currentPlayer).getActivePawns()) {
                         if (p.getPosition() == position) {
-                            currentPlayer.removeActivePawn(p);
-                            currentPlayer.addBasePawn(new Pawn());
+                            board.getPlayerPawns(currentPlayer).removeActivePawn(p);
+                            board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());
                             break;
                         }
                     }

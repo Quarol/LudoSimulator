@@ -8,17 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TakeOutPawnAction implements Action {
-    private Board board;
-    private Player player;
-    private boolean possible;
     @Override
     public boolean isPossible(Board board, Player player, int roll) {
         if (roll != 6) {
             return false;
         }
-        boolean possible = player.getBasePawns().size() != 0;
+        boolean possible = board.getPlayerPawns(player).getBasePawns().size() != 0;
 
-        for (Pawn pawn : player.getActivePawns()) {
+        for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
             if (pawn.getPosition() == player.getStartPosition()) {
                 return false;
             }
@@ -34,9 +31,9 @@ public class TakeOutPawnAction implements Action {
     public Board execute(Board board, Player player, int roll) {
         List<Pawn> pawns = getPawns(board, player, roll);
         if (pawns.size() != 0) {
-            player.removeBasePawn();
-            player.setBasePawns(player.getBasePawns());
-            player.addActivePawn(pawns.get(0));
+            board.getPlayerPawns(player).removeBasePawn();
+            board.getPlayerPawns(player).setBasePawns(board.getPlayerPawns(player).getBasePawns());
+            board.getPlayerPawns(player).addActivePawn(pawns.get(0));
         }
         return board;
     }

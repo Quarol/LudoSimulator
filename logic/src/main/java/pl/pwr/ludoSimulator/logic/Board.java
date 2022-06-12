@@ -1,7 +1,9 @@
 package pl.pwr.ludoSimulator.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Board {
     private final List<Player> players;
@@ -13,10 +15,16 @@ public class Board {
         return players.get(index);
     }
 
+    private Map<Player, PlayerPawns> playersMap = new HashMap<>();
+
+    public PlayerPawns getPlayerPawns (Player player) {
+        return this.playersMap.get(player);
+    }
+
     public List<Player> getActivePlayers() {
         List<Player> list = new ArrayList<>();
         for (Player player : players) {
-            if (!player.hasEnded()) {
+            if (getPlayerPawns(player).getEndPawns().size() != 4) {
                 list.add(player);
             }
         }
@@ -24,5 +32,8 @@ public class Board {
     }
     public Board (List<Player> players) {
         this.players =  players;
+        for (Player player : players) {
+            playersMap.put(player, new PlayerPawns());
+        }
     }
 }
