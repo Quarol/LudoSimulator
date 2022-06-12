@@ -7,15 +7,13 @@ import pl.pwr.ludoSimulator.logic.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoveEndPawnAction implements Action{
-    private boolean possible;
-    private List<Pawn> pawns;
-    private int steps;
-    private Board board;
+public class MoveEndPawnAction implements Action {
     @Override
     public boolean isPossible(Board board, Player player, int roll) {
-        this.board = board;
-        this.steps = roll;
+
+        return getPawns(board, player, roll).size() != 0;
+    }
+    private List<Pawn> getPawns (Board board, Player player, int roll) {
         List<Integer> usedPositions = new ArrayList<>();
         List<Pawn> endPawnsWhichCanMove = new ArrayList<>();
         for (Pawn pawn : player.getEndPawns()) {
@@ -26,18 +24,14 @@ public class MoveEndPawnAction implements Action{
                 endPawnsWhichCanMove.add(pawn);
             }
         }
-        this.pawns = endPawnsWhichCanMove;
-        return this.possible = endPawnsWhichCanMove.size() != 0;
-    }
-    public List<Pawn> getPawns () {
-        return pawns;
+        return endPawnsWhichCanMove;
     }
     @Override
-    public Board execute(Pawn pawn) {
-        pawn = pawns.get(0);
-        if (possible) {
-            pawn.move(steps);
+    public Board execute(Board board, Player player, int roll) {
+        List<Pawn> pawns = getPawns(board, player, roll);
+        if (pawns.size() != 0) {
+            pawns.get(0).move(roll);
         }
-        return this.board;
+        return board;
     }
 }
