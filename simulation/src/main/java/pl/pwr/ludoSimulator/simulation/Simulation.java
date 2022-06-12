@@ -20,7 +20,7 @@ public class Simulation {
     public int random () {
         return (int) Math.random();
     }
-    private List<Action> actions;
+    private final List<Action> actions;
     public void start () {
         int nrOfMoves = 0;
         Display display = new Display(board);
@@ -33,11 +33,6 @@ public class Simulation {
                 List<Action> possibleActions;
                 do {
                     roll = Dice.roll();
-                    List<Action> actions = new ArrayList<>();
-                    actions.add(new TakeOutPawnAction());
-                    actions.add(new MoveActivePawnAction());
-                    actions.add(new MoveEndPawnAction());
-                    actions.add(new KillPawnAction());
                     possibleActions = new ArrayList<>();
 
                     for (Action action : actions) {
