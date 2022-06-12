@@ -17,7 +17,7 @@ public class Application {
         System.out.println("\n");*/
         nrOfPLayers = 2;
 
-        Simulation simulation = new Simulation(new Board(nrOfPLayers));
+        Simulation simulation = new Simulation(new BoardInitializer(4).initialize());
         simulation.start();
         Display display = new Display(simulation.getBoard());
         display.display();

@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private final int numberOfPlayers;
-    private final List<Player> players = new ArrayList<>();
-    public int getNumberOfPlayers() { return numberOfPlayers; }
+    private final List<Player> players;
+    public int getNumberOfPlayers() { return players.size(); }
     public List<Player> getPlayers () {
         return players;
     }
@@ -26,9 +25,7 @@ public class Board {
         }
         return list;
     }
-    public Board (int numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
-        for (int i = 0; i < numberOfPlayers; ++i)
-            players.add(new Player());
+    public Board (List<Player> players) {
+        this.players =  players;
     }
 }

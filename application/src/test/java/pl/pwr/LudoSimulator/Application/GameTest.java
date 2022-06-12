@@ -1,19 +1,20 @@
-package pl.pwr.LudoSimulator.Application;
+package pl.pwr.ludoSimulator.application;
 
 import org.junit.jupiter.api.Test;
 import java.util.List;
-import pl.pwr.LudoSimulator.Display.Display;
-import pl.pwr.LudoSimulator.Logic.Actions.*;
-import pl.pwr.LudoSimulator.Logic.Pawns.ActivePawn;
-import pl.pwr.LudoSimulator.Logic.Board;
-import pl.pwr.LudoSimulator.Logic.Dice;
-import pl.pwr.LudoSimulator.Logic.Player;
+import pl.pwr.ludoSimulator.display.Display;
+import pl.pwr.ludoSimulator.logic.BoardInitializer;
+import pl.pwr.ludoSimulator.logic.actions.*;
+import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
+import pl.pwr.ludoSimulator.logic.Board;
+import pl.pwr.ludoSimulator.logic.Dice;
+import pl.pwr.ludoSimulator.logic.Player;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GameTest {
     @Test
     void mainTest() {
-        Board board = new Board(4);
+        Board board = new BoardInitializer(4).initialize();
         Display display = new Display(board);
         for (Player player : board.getPlayers()) {
             int roll = 6;
