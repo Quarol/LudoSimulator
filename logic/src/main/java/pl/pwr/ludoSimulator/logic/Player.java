@@ -4,14 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements Cloneable {
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            return new Object();
-        }
-    }
-
     private List<Pawn> basePawns = new ArrayList<>();
     private final List<Pawn> activePawns = new ArrayList<>();
     private final List<Pawn> endPawns = new ArrayList<>();
