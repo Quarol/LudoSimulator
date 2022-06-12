@@ -1,13 +1,4 @@
-- Klasa Player ma za dużo odpowiedzialnośći
-- To, że implementacje interfejsu Action ustawiają swój stan (this.... = ...) w metodach z interfejsu to złe podejście. Metody z interfejsu raczej nie powinny zmieniać stanu klas go implementujących. Może warto rozważyć takiej podejście:
-
-```
-public interface Action {
-boolean isPossible(BoardState boardState, Player player);
-BoardState execute(BoardState boardState, Player player); // akcja przyjmuje obecny stan planszy i zwraca nowy - po zmiane
-}
-```
-
+- Klasa Player ma za dużo odpowiedzialności
 - klasa z logiką symulacji zależy od klasy odpowiedzialnej za wyświetlanie (Simulation -> Display) - uczulałem na zajęciach, żeby tak nie robić. Wyświetlanie może być, ale np w klasie Application. Klasy symulacji nie powinny nic wiedzieć na temat wyświetlania
 - Zbyt dużo zahardkodowanych wartości
 - proszę się zastanowić jak uczynić ten kod bardziej uniwersalnym, niezależnym od wpisanych na stałę liczb
@@ -17,10 +8,10 @@ Z Eportalu:
 - Zamiast klonowania można użyć konstruktora
 - Innym podejściem, które być może uprości trochę w kodzie, będzie wprowadzenie obiektu Map<Player, PlayerPawns> pawnsByPlayer np. w klasie logiki symulacji. Dzięki temu Player nie będzie przechowywał pionków, ale logika symulacji już będzie wiedziała (równie dobrze może to być w Board)
 
-- metoda start jest wielka - warto ją rozbić na kilka metod, np findPossibleActions(...), która zwracałaby listę akcji, killPawn() etc
+- metoda start jest wielka - warto ją rozbić na kilka metod, np findPossibleActions(...), która zwracałaby listę akcji etc.
 
 Z Teams:
-- spodziewałbym się, że wprowadzą Panowie interfejs Action, aby symulacja nie wiedziała nic o możliwych akcjach (a więc spełniała O w SOLID) i można byłoby je dowolnie dodawać. Interfejs akcji mógłby przyjmować na wejściu stan planszy i po jej wykonaniu, zwracać nowy stan
+- Interfejs akcji mógłby przyjmować na wejściu stan planszy i po jej wykonaniu, zwracać nowy stan
 
 - zahardcodowane liczby i generalnie klasa BasePosition cała do przeprojektowania
 
