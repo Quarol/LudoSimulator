@@ -2,7 +2,6 @@ package pl.pwr.ludoSimulator.simulation;
 
 import pl.pwr.ludoSimulator.logic.*;
 import pl.pwr.ludoSimulator.logic.actions.*;
-import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.display.Display;
 
 import java.util.ArrayList;
@@ -49,9 +48,7 @@ public class Simulation {
                     boolean wasActionAccomplished =  (possibleActions.size() != 0);
                     if (wasActionAccomplished) {
                         int actionToExecute = random() * possibleActions.size();
-                        List<Pawn> availablePawns = possibleActions.get(actionToExecute).getPawns();
-                        int pawnToPerformAction = random() * availablePawns.size();
-                        possibleActions.get(actionToExecute).execute(availablePawns.get(pawnToPerformAction));
+                        possibleActions.get(actionToExecute).execute(board, player, roll);
                         System.out.println();
                         display.display();
                         nrOfMoves++;
