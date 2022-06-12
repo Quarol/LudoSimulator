@@ -14,7 +14,7 @@ public class Board {
         return players.get(index);
     }
 
-    private Map<Player, PlayerPawns> playersMap = new HashMap<>();
+    private final Map<Player, PlayerPawns> playersMap = new HashMap<>();
 
     public PlayerPawns getPlayerPawns (Player player) {
         return this.playersMap.get(player);

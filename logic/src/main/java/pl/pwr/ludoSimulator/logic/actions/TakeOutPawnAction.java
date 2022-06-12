@@ -4,9 +4,6 @@ import pl.pwr.ludoSimulator.logic.Board;
 import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.logic.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TakeOutPawnAction implements Action {
     @Override
     public boolean isPossible(Board board, Player player, int roll) {
@@ -14,7 +11,6 @@ public class TakeOutPawnAction implements Action {
             return false;
         }
         boolean possible = board.getPlayerPawns(player).getBasePawns().size() != 0;
-
         for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
             if (pawn.getPosition() == player.getStartPosition()) {
                 return false;

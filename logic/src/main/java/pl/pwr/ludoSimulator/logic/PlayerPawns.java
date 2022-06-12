@@ -15,9 +15,6 @@ public class PlayerPawns {
     public List<Pawn> getBasePawns() {
         return basePawns;
     }
-    public void setBasePawns(List<Pawn> basePawns) {
-        this.basePawns = basePawns;
-    }
     public List<Pawn> getActivePawns() {
         return activePawns;
     }

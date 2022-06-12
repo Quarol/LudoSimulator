@@ -11,7 +11,6 @@ public class KillPawnAction implements Action {
     }
 
     private List<Pawn> getPawns(Board board, Player player, int roll) {
-        List<Integer> usedPositions = new ArrayList<>();
         List<Integer> otherPlayersUsedPositions = new ArrayList<>();
         List<Pawn> activePawnsWhichCanKill = new ArrayList<>();
         for (Player currentPlayer : board.getPlayers()) {
@@ -22,7 +21,7 @@ public class KillPawnAction implements Action {
             }
         }
         for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
-            if (!usedPositions.contains((pawn.getPosition() + roll) % 40) && otherPlayersUsedPositions.contains((pawn.getPosition() + roll) % 40)) {
+            if (otherPlayersUsedPositions.contains((pawn.getPosition() + roll) % 40)) {
                 if (pawn.getPosition() + roll < player.getEndPosition()) {
                     activePawnsWhichCanKill.add(pawn);
                 } else if (pawn.getPosition() > player.getEndPosition()) {

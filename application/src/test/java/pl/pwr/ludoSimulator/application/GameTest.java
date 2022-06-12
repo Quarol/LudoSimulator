@@ -79,17 +79,19 @@ public class GameTest {
         action.isPossible(board, board.getPlayer(0), 4);
         action.execute(board, board.getPlayer(0), 4);
         //display.display();
-        assertEquals("\n" +
-                "1       O O V      22 \n" +
-                "        O X O      2  \n" +
-                "        O X O         \n" +
-                "        O 2 O         \n" +
-                "> O O O O X 1 O O O O \n" +
-                "O X 1 X 1   X 3 X X O \n" +
-                "O O O O O X O O O O < \n" +
-                "        O 4 O         \n" +
-                "        O X O         \n" +
-                "44      O X O      33 \n" +
-                "4       ^ O O      3  \n", display.toString());
+        assertEquals("""
+
+                1       O O V      22\s
+                        O X O      2 \s
+                        O X O        \s
+                        O 2 O        \s
+                > O O O O X 1 O O O O\s
+                O X 1 X 1   X 3 X X O\s
+                O O O O O X O O O O <\s
+                        O 4 O        \s
+                        O X O        \s
+                44      O X O      33\s
+                4       ^ O O      3 \s
+                """, display.toString());
     }
 }

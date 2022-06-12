@@ -15,9 +15,6 @@ public class Simulation {
         this.actions = actions;
         this.simulationCallback = simulationCallback;
     }
-    public Board getBoard() {
-        return board;
-    }
     public int random () {
         return (int) Math.random();
     }

@@ -8,7 +8,6 @@ public class BasePositions {
     public DisplayPosition getPosition (int playerId, int pawnPosition) {
         int x = -1;
         int y = -1;
-        List<DisplayPosition> positionList = new ArrayList<>();
         switch (playerId) {
             case 1 -> {
                 x = 0;
