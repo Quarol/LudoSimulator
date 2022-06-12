@@ -38,7 +38,6 @@ Z Eportalu:
 - Innym podejściem, które być może uprości trochę w kodzie, będzie wprowadzenie obiektu Map<Player, PlayerPawns> pawnsByPlayer np. w klasie logiki symulacji. Dzięki temu Player nie będzie przechowywał pionków, ale logika symulacji już będzie wiedziała (równie dobrze może to być w Board)
 
 - metoda start jest wielka - warto ją rozbić na kilka metod, np findPossibleActions(...), która zwracałaby listę akcji, killPawn() etc
-- plus za przypisywanie booleanów do zmiennych - zwiększa to czytelność
 
 Z Teams:
 - spodziewałbym się, że wprowadzą Panowie interfejs Action, aby symulacja nie wiedziała nic o możliwych akcjach (a więc spełniała O w SOLID) i można byłoby je dowolnie dodawać. Interfejs akcji mógłby przyjmować na wejściu stan planszy i po jej wykonaniu, zwracać nowy stan
