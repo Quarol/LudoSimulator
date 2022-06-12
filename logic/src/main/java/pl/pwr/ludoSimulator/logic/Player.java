@@ -3,7 +3,7 @@ package pl.pwr.ludoSimulator.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Cloneable {
+public class Player  {
     private List<Pawn> basePawns = new ArrayList<>();
     private final List<Pawn> activePawns = new ArrayList<>();
     private final List<Pawn> endPawns = new ArrayList<>();
