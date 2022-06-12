@@ -16,29 +16,28 @@ public class TakeOutPawnAction implements Action {
         if (roll != 6) {
             return false;
         }
-        this.board = board;
-        this.player = player;
-        this.possible = this.player.getBasePawns().size() != 0;
+        boolean possible = player.getBasePawns().size() != 0;
 
-        for (Pawn pawn : this.player.getActivePawns()) {
-            if (pawn.getPosition() == this.player.getStartPosition()) {
-                return this.possible = false;
+        for (Pawn pawn : player.getActivePawns()) {
+            if (pawn.getPosition() == player.getStartPosition()) {
+                return false;
             }
         }
-        return this.possible;
+        return possible;
     }
-    public List<Pawn> getPawns () {
+    private List<Pawn> getPawns (Board board, Player player, int roll) {
         List<Pawn> list = new ArrayList<>();
         list.add(new Pawn(player.getStartPosition()));
         return list;
     }
     @Override
-    public Board execute(Pawn pawn) {
-        if (possible) {
-            this.player.removeBasePawn();
-            this.player.setBasePawns(this.player.getBasePawns());
-            this.player.addActivePawn(pawn);
+    public Board execute(Board board, Player player, int roll) {
+        List<Pawn> pawns = getPawns(board, player, roll);
+        if (pawns.size() != 0) {
+            player.removeBasePawn();
+            player.setBasePawns(player.getBasePawns());
+            player.addActivePawn(pawns.get(0));
         }
-        return this.board;
+        return board;
     }
 }

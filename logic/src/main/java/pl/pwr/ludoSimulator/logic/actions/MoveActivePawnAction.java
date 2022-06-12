@@ -8,24 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoveActivePawnAction implements Action {
-    private boolean possible;
-    private int steps;
-    private Player player;
-    private Board board;
-    private List<Pawn> pawns = new ArrayList<>();
-    private List<Integer> usedEndPositions = new ArrayList<>();
-
-    public List<Pawn> getPawns() {
-        return pawns;
-    }
-
-    @Override
-    public boolean isPossible(Board board, Player player, int roll) {
-        this.player = player;
-        this.steps = roll;
-        this.board = board;
+    private List<Pawn> getPawns(Board board, Player player, int roll) {
+        List<Integer> usedEndPositions = getUsedEndPositions(board, player);
         for (Pawn pawn : player.getEndPawns()) {
-            this.usedEndPositions.add(pawn.getPosition());
+            usedEndPositions.add(pawn.getPosition());
         }
         List<Integer> usedPositions = new ArrayList<>();
         List<Pawn> activePawnsWhichCanMove = new ArrayList<>();
@@ -40,26 +26,39 @@ public class MoveActivePawnAction implements Action {
                     activePawnsWhichCanMove.add(pawn);
                 } else if (pawn.getPosition() < player.getEndPosition() && pawn.getPosition() + roll > player.getEndPosition()
                         && pawn.getPosition() + roll - player.getEndPosition() < 5
-                        && !this.usedEndPositions.contains(pawn.getPosition() + roll - player.getEndPosition() - 1)) {
+                        && !usedEndPositions.contains(pawn.getPosition() + roll - player.getEndPosition() - 1)) {
                     activePawnsWhichCanMove.add(pawn);
                 }
             }
         }
-        this.pawns = activePawnsWhichCanMove;
-        return this.possible = activePawnsWhichCanMove.size() != 0;
+        return activePawnsWhichCanMove;
+    }
+
+    private List<Integer> getUsedEndPositions (Board board, Player player) {
+        List<Integer> usedEndPositions = new ArrayList<>();
+        for (Pawn pawn : player.getEndPawns()) {
+            usedEndPositions.add(pawn.getPosition());
+        }
+        return usedEndPositions;
+    }
+    @Override
+    public boolean isPossible(Board board, Player player, int roll) {
+        return getPawns(board, player, roll).size() != 0;
     }
 
     @Override
-    public Board execute(Pawn pawn) {
+    public Board execute(Board board, Player player, int roll) {
         int endPosition = player.getEndPosition();
-        if (pawn.getPosition()+steps < endPosition || pawn.getPosition() > endPosition) {
-            pawn.setPosition((pawn.getPosition()+steps)%40);
-        } else if (pawn.getPosition() < endPosition && pawn.getPosition()+steps > endPosition) {
-            if (pawn.getPosition()+steps-endPosition < 5 && !this.usedEndPositions.contains(pawn.getPosition()+steps-endPosition-1)) {
-                this.player.removeActivePawn(pawn);
-                this.player.addEndPawn(new Pawn(pawn.getPosition()+steps-endPosition-1));
+        List<Integer> usedEndPositions = getUsedEndPositions(board, player);
+        Pawn pawn = getPawns(board, player, roll).get(0);
+        if (pawn.getPosition()+roll < endPosition || pawn.getPosition() > endPosition) {
+            pawn.setPosition((pawn.getPosition()+roll)%40);
+        } else if (pawn.getPosition() < endPosition && pawn.getPosition()+roll > endPosition) {
+            if (pawn.getPosition()+roll-endPosition < 5 && !usedEndPositions.contains(pawn.getPosition()+roll-endPosition-1)) {
+                player.removeActivePawn(pawn);
+                player.addEndPawn(new Pawn(pawn.getPosition()+roll-endPosition-1));
             }
         }
-        return this.board;
+        return board;
     }
 }
