@@ -9,11 +9,7 @@ public class PlayerInitializer {
         this.counter++;
         int startPosition = StartPositions.values()[id].getStartPosition();
         int endPosition = Math.floorMod(startPosition-1, 40);
-
-        Player player = new Player();
-        player.setId(id);
-        player.setStartPosition(startPosition);
-        player.setEndPosition(endPosition);
+        Player player = new Player(id, startPosition, endPosition);
 
         return player;
     }

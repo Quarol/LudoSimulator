@@ -31,6 +31,7 @@ public class Player  {
 
     private int id;
     private int startPosition;
+    private final int endPosition;
 
     public int getStartPosition() {
         return startPosition;
@@ -60,24 +61,12 @@ public class Player  {
         this.basePawns.remove(basePawns.get(0));
     }
 
-    private int endPosition;
-
     public int getId() {
         return id;
     }
-
-    public void setId(int id){
+    public Player(int id, int startPosition,int endPosition) {
         this.id = id;
-    }
-
-    public void setStartPosition(int startPosition) {
         this.startPosition = startPosition;
-    }
-
-    public void setEndPosition(int endPosition) {
         this.endPosition = endPosition;
-    }
-
-    public Player() {
     }
 }
