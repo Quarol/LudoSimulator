@@ -75,5 +75,5 @@ public class Simulation {
         System.out.println();
         System.out.println();
         System.out.println("Nr of displays: " + nrOfMoves);
-        }
     }
+}

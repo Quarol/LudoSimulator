@@ -49,7 +49,7 @@ public class Player implements Cloneable {
 
     private static int counter = 0;
     private final int id;
-    private int startPosition;
+    private final int startPosition;
 
     public int getStartPosition() {
         return startPosition;
