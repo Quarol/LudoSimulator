@@ -26,21 +26,8 @@ public class EndPositions {
         positions.add(new DisplayPosition(10, 7));
         positions.add(new DisplayPosition(10, 6));
     }
-    public List<DisplayPosition> getPositions (int playerId) {
-        return List.of(this.positions.get((playerId)*4), this.positions.get((playerId)*4+1), this.positions.get((playerId)*4+2), this.positions.get((playerId)*4+3));
-    }
     public DisplayPosition get (int index) {
         return this.positions.get(index);
-    }
-    public DisplayPosition getPosition (int playerId, int pawnPosition) {
-        return positions.get(playerId*4+pawnPosition);
-    }
-    public DisplayPosition getPosition (Player player, int pawnPosition) {
-        int playerId = player.getId();
-        return positions.get(playerId*4+pawnPosition);
-    }
-    public DisplayPosition getPosition (int playerId, Pawn pawn) {
-        return positions.get(playerId*4+pawn.getPosition());
     }
     public DisplayPosition getPosition (Player player, Pawn pawn) {
         int playerId = player.getId();
