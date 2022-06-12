@@ -78,7 +78,7 @@ public class GameTest {
         action = new MoveActivePawnAction();
         action.isPossible(board, board.getPlayer(0), 4);
         action.execute(board, board.getPlayer(0), 4);
-        display.display();
+        //display.display();
         assertEquals("\n" +
                 "1       O O V      22 \n" +
                 "        O X O      2  \n" +

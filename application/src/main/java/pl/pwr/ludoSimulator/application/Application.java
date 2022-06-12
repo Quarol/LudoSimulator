@@ -20,14 +20,14 @@ public class Application {
         System.out.println("\n");
         int nrOfPLayers;
         */
-
         List<Action> actions = new ArrayList<>();
         actions.add(new TakeOutPawnAction());
         actions.add(new MoveActivePawnAction());
         actions.add(new MoveEndPawnAction());
         actions.add(new KillPawnAction());
-
-        Simulation simulation = new Simulation(new BoardInitializer(4).initialize(), actions, new Callback());
+        Board board = new BoardInitializer(4).initialize();
+        Display display = new Display(board);
+        Simulation simulation = new Simulation(board, actions, new Callback(display));
         simulation.start();
     }
 }

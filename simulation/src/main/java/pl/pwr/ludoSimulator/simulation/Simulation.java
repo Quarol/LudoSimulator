@@ -9,9 +9,11 @@ import java.util.List;
 
 public class Simulation {
     private final Board board;
+    private final SimulationCallback simulationCallback;
     public Simulation (Board board, List<Action> actions, SimulationCallback simulationCallback) {
         this.board = board;
         this.actions = actions;
+        this.simulationCallback = simulationCallback;
     }
     public Board getBoard() {
         return board;
@@ -34,13 +36,13 @@ public class Simulation {
                     boolean wasActionAccomplished =  (possibleActions.size() != 0);
                     if (wasActionAccomplished) {
                         afterActionAccomplished(board, player, roll, possibleActions, display);
+                        simulationCallback.callbackAfterMove();
                     }
                 } while (roll == 6);
             }
+            simulationCallback.callbackAfterRound();
         }
-        System.out.println();
-        System.out.println();
-        System.out.println("Nr of displays: " + nrOfMoves);
+        simulationCallback.callbackAfterEnd();
     }
     private List<Action> findPossibleActions (Board board, Player player, int roll) {
         List <Action> possibleActions = new ArrayList<>();
@@ -53,8 +55,5 @@ public class Simulation {
     private void afterActionAccomplished (Board board, Player player, int roll, List<Action> possibleActions, Display display) {
         int actionToExecute = random() * possibleActions.size();
         possibleActions.get(actionToExecute).execute(board, player, roll);
-        System.out.println();
-        display.display();
-        nrOfMoves++;
     }
 }
