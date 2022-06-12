@@ -2,7 +2,7 @@ package pl.pwr.ludoSimulator.display;
 
 public enum StartPositions {
     PLAYER1, PLAYER2, PLAYER3, PLAYER4;
-    public DisplayPosition getStartPosition() {
+    public DisplayPosition get() {
         switch (this) {
             case PLAYER1:
                 return new DisplayPosition(0,4);

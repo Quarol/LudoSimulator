@@ -12,7 +12,7 @@ public class Display {
     private final BasePositions basePositions = new BasePositions();
     private final EndPositions endPositions = new EndPositions();
     private final ActivePositions activePositions = new ActivePositions();
-    private final StartPositions startPositions = new StartPositions();
+    private final StartPositions[] startPositions = StartPositions.values();
     private void setDisplayTableField (DisplayPosition position, char value) {
         this.displayTable.get(position.getX()).set(position.getY(), value);
     }
@@ -40,10 +40,10 @@ public class Display {
         for (int i = 0; i < 40; i++) {
             setDisplayTableField(activePositions.get(i), 'O');
         }
-        setDisplayTableField(startPositions.get(0), '>');
-        setDisplayTableField(startPositions.get(1), 'V');
-        setDisplayTableField(startPositions.get(2), '<');
-        setDisplayTableField(startPositions.get(3), '^');
+        setDisplayTableField(startPositions[0].get(), '>');
+        setDisplayTableField(startPositions[1].get(), 'V');
+        setDisplayTableField(startPositions[2].get(), '<');
+        setDisplayTableField(startPositions[3].get(), '^');
         for (int i = 0; i < 16; i++) {
             setDisplayTableField(endPositions.get(i), 'X');
         }
