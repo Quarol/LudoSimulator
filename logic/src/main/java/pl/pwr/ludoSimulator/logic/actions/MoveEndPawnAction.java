@@ -1,9 +1,7 @@
 package pl.pwr.ludoSimulator.logic.actions;
 
 import pl.pwr.ludoSimulator.logic.Board;
-import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
-import pl.pwr.ludoSimulator.logic.pawns.EndPawn;
-import pl.pwr.ludoSimulator.logic.pawns.Pawn;
+import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.logic.Player;
 
 import java.util.ArrayList;
@@ -20,10 +18,10 @@ public class MoveEndPawnAction implements Action{
         this.steps = roll;
         List<Integer> usedPositions = new ArrayList<>();
         List<Pawn> endPawnsWhichCanMove = new ArrayList<>();
-        for (EndPawn pawn : player.getEndPawns()) {
+        for (Pawn pawn : player.getEndPawns()) {
             usedPositions.add(pawn.getPosition());
         }
-        for (EndPawn pawn : player.getEndPawns()) {
+        for (Pawn pawn : player.getEndPawns()) {
             if (pawn.getPosition()+roll < 4 && !usedPositions.contains(pawn.getPosition()+roll)) {
                 endPawnsWhichCanMove.add(pawn);
             }
@@ -38,7 +36,7 @@ public class MoveEndPawnAction implements Action{
     public Board execute(Pawn pawn) {
         pawn = pawns.get(0);
         if (possible) {
-            ((EndPawn) pawn).move(steps);
+            pawn.move(steps);
         }
         return this.board;
     }

@@ -2,8 +2,9 @@ package pl.pwr.ludoSimulator.display;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.logic.Player;
-import pl.pwr.ludoSimulator.logic.pawns.EndPawn;
 
 public class EndPositions {
     private final List<DisplayPosition> positions = new ArrayList<>();
@@ -38,10 +39,10 @@ public class EndPositions {
         int playerId = player.getId();
         return positions.get(playerId*4+pawnPosition);
     }
-    public DisplayPosition getPosition (int playerId, EndPawn pawn) {
+    public DisplayPosition getPosition (int playerId, Pawn pawn) {
         return positions.get(playerId*4+pawn.getPosition());
     }
-    public DisplayPosition getPosition (Player player, EndPawn pawn) {
+    public DisplayPosition getPosition (Player player, Pawn pawn) {
         int playerId = player.getId();
         return positions.get(playerId*4+ pawn.getPosition());
     }

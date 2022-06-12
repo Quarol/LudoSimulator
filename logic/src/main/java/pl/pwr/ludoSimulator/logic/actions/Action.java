@@ -1,10 +1,7 @@
 package pl.pwr.ludoSimulator.logic.actions;
 
 import pl.pwr.ludoSimulator.logic.Board;
-import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
-import pl.pwr.ludoSimulator.logic.pawns.BasePawn;
-import pl.pwr.ludoSimulator.logic.pawns.EndPawn;
-import pl.pwr.ludoSimulator.logic.pawns.Pawn;
+import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.logic.Player;
 
 import java.util.List;

@@ -3,10 +3,8 @@ package pl.pwr.ludoSimulator.display;
 import java.util.ArrayList;
 import java.util.List;
 import pl.pwr.ludoSimulator.logic.Board;
-import pl.pwr.ludoSimulator.logic.pawns.BasePawn;
+import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.logic.Player;
-import pl.pwr.ludoSimulator.logic.pawns.EndPawn;
-import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
 
 public class Display {
     private final List<List<Character>> displayTable = new ArrayList<>();
@@ -56,10 +54,10 @@ public class Display {
             for (int i = 0; i < player.getBasePawns().size(); i++) {
                 setDisplayTableField(basePositions.getPosition(player, i), player.getId()+1);
             }
-            for (EndPawn pawn : player.getEndPawns()) {
+            for (Pawn pawn : player.getEndPawns()) {
                 setDisplayTableField(endPositions.getPosition(player, pawn), player.getId()+1);
             }
-            for (ActivePawn pawn : player.getActivePawns()) {
+            for (Pawn pawn : player.getActivePawns()) {
                 setDisplayTableField(activePositions.get(pawn), player.getId()+1);
             }
         }

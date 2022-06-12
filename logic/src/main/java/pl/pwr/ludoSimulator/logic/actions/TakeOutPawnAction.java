@@ -1,8 +1,7 @@
 package pl.pwr.ludoSimulator.logic.actions;
 
-import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
 import pl.pwr.ludoSimulator.logic.Board;
-import pl.pwr.ludoSimulator.logic.pawns.Pawn;
+import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.logic.Player;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class TakeOutPawnAction implements Action {
         this.player = player;
         this.possible = this.player.getBasePawns().size() != 0;
 
-        for (ActivePawn pawn : this.player.getActivePawns()) {
+        for (Pawn pawn : this.player.getActivePawns()) {
             if (pawn.getPosition() == this.player.getStartPosition()) {
                 return this.possible = false;
             }
@@ -30,7 +29,7 @@ public class TakeOutPawnAction implements Action {
     }
     public List<Pawn> getPawns () {
         List<Pawn> list = new ArrayList<>();
-        list.add(new ActivePawn(player.getStartPosition()));
+        list.add(new Pawn(player.getStartPosition()));
         return list;
     }
     @Override
@@ -38,7 +37,7 @@ public class TakeOutPawnAction implements Action {
         if (possible) {
             this.player.removeBasePawn();
             this.player.setBasePawns(this.player.getBasePawns());
-            this.player.addActivePawn((ActivePawn) pawn);
+            this.player.addActivePawn(pawn);
         }
         return this.board;
     }
