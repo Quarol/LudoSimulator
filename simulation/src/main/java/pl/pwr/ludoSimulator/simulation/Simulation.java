@@ -21,11 +21,10 @@ public class Simulation {
         return (int) Math.random();
     }
     private final List<Action> actions;
+    private int nrOfMoves = 0;
     public void start () {
-        int nrOfMoves = 0;
         Display display = new Display(board);
         display.display();
-
         while (board.getActivePlayers().size() > 1) {
             for (Player player : board.getActivePlayers()) {
                 int roll;
@@ -34,11 +33,7 @@ public class Simulation {
                     List<Action> possibleActions = findPossibleActions(board, player, roll);
                     boolean wasActionAccomplished =  (possibleActions.size() != 0);
                     if (wasActionAccomplished) {
-                        int actionToExecute = random() * possibleActions.size();
-                        possibleActions.get(actionToExecute).execute(board, player, roll);
-                        System.out.println();
-                        display.display();
-                        nrOfMoves++;
+                        afterActionAccomplished(board, player, roll, possibleActions, display);
                     }
                 } while (roll == 6);
             }
@@ -54,5 +49,12 @@ public class Simulation {
                 possibleActions.add(action);
         }
         return possibleActions;
+    }
+    private void afterActionAccomplished (Board board, Player player, int roll, List<Action> possibleActions, Display display) {
+        int actionToExecute = random() * possibleActions.size();
+        possibleActions.get(actionToExecute).execute(board, player, roll);
+        System.out.println();
+        display.display();
+        nrOfMoves++;
     }
 }
