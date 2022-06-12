@@ -9,10 +9,12 @@ public class BasePositions {
     public void generatePositions (int playerId) {
         switch (playerId) {
             case 1 -> {
-                positions.add(new DisplayPosition(0, 0));
-                positions.add(new DisplayPosition(1, 0));
-                positions.add(new DisplayPosition(0, 1));
-                positions.add(new DisplayPosition(1, 1));
+                int x = 0;
+                int y = 0;
+                positions.add(new DisplayPosition(x, y));
+                positions.add(new DisplayPosition(x+1, y));
+                positions.add(new DisplayPosition(x, y+1));
+                positions.add(new DisplayPosition(x+1, y+1));
             }
             case 2 -> {
                 positions.add(new DisplayPosition(19, 0));
