@@ -88,7 +88,6 @@ public class Player implements Cloneable {
     public Player() {
         this.id = counter;
         Player.counter++;
-        StartPositions.values();
         this.startPosition = StartPositions.values()[this.id].getStartPosition();
         this.endPosition = Math.floorMod(startPosition-1, 40);
         this.basePawns.add(new BasePawn());
