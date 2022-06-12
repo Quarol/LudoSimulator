@@ -14,37 +14,34 @@ public class BasePositions {
             case 1 -> {
                 x = 0;
                 y = 0;
-                positionList.add(new DisplayPosition(x, y));
-                positionList.add(new DisplayPosition(x+1, y));
-                positionList.add(new DisplayPosition(x, y+1));
-                positionList.add(new DisplayPosition(x+1, y+1));
             }
             case 2 -> {
                 x = 19;
                 y = 0;
-                positionList.add(new DisplayPosition(x, y));
-                positionList.add(new DisplayPosition(x+1, y));
-                positionList.add(new DisplayPosition(x, y+1));
-                positionList.add(new DisplayPosition(x+1, y+1));
             }
             case 3 -> {
                 x = 19;
                 y = 9;
-                positionList.add(new DisplayPosition(x, y));
-                positionList.add(new DisplayPosition(x+1, y));
-                positionList.add(new DisplayPosition(x, y+1));
-                positionList.add(new DisplayPosition(x+1, y+1));
             }
             case 4 -> {
                 x = 0;
                 y = 9;
-                positionList.add(new DisplayPosition(x, y));
-                positionList.add(new DisplayPosition(x+1, y));
-                positionList.add(new DisplayPosition(x, y+1));
-                positionList.add(new DisplayPosition(x+1, y+1));
             }
         }
-        return positionList.get(pawnPosition);
-        //return new DisplayPosition(-1, -1);
+        switch (pawnPosition) {
+            case 0 -> {
+                return new DisplayPosition(x, y);
+            }
+            case 1 -> {
+                return new DisplayPosition(x+1, y);
+            }
+            case 2 -> {
+                return new DisplayPosition(x, y+1);
+            }
+            case 3 -> {
+                return new DisplayPosition(x+1, y+1);
+            }
+        }
+        return new DisplayPosition(-1, -1);
     }
 }
