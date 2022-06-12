@@ -3,6 +3,7 @@ package pl.pwr.ludoSimulator.logic;
 import pl.pwr.ludoSimulator.logic.pawns.ActivePawn;
 import pl.pwr.ludoSimulator.logic.pawns.BasePawn;
 import pl.pwr.ludoSimulator.logic.pawns.EndPawn;
+import pl.pwr.ludoSimulator.logic.StartPositions;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -87,24 +88,9 @@ public class Player implements Cloneable {
     public Player() {
         this.id = counter;
         Player.counter++;
-        switch (this.id) {
-            case 0 -> {
-                this.startPosition = 0;
-                this.endPosition = 39;
-            }
-            case 1 -> {
-                this.startPosition = 10;
-                this.endPosition = 9;
-            }
-            case 2 -> {
-                this.startPosition = 20;
-                this.endPosition = 19;
-            }
-            case 3 -> {
-                this.startPosition = 30;
-                this.endPosition = 29;
-            }
-        }
+        StartPositions.values();
+        this.startPosition = StartPositions.values()[this.id].getStartPosition();
+        this.endPosition = Math.floorMod(startPosition-1, 40);
         this.basePawns.add(new BasePawn());
         this.basePawns.add(new BasePawn());
         this.basePawns.add(new BasePawn());

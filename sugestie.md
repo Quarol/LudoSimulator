@@ -32,7 +32,7 @@ this.endPosition = 29;
 - proszę się zastanowić jak uczynić ten kod bardziej uniwersalnym, niezależnym od wpisanych na stałę liczb
 
 Z Eportalu:
-- Konstuktor Player ma w sobie za dużo i klasa Player generalnie ma za dużo odpowiedzialności. Warto by stworzyć klasę, której odpowiedzialnością będzie rozmieszczenie graczy na planszy. Hardcodowanie wartości typu 0, 39, 10, 19 jest słabe, bo nie wiadomo co one przedstawiają. Aby sprawić, żeby kod był bardziej czytelny, można wprowadzić klasę typu enum (np. StartingPositions), która trzymałaby takie stałe.
+- Konstuktor Player ma w sobie za dużo i klasa Player generalnie ma za dużo odpowiedzialności. Warto by stworzyć klasę, której odpowiedzialnością będzie rozmieszczenie graczy na planszy.
 - Zamiast klonowania można użyć konstruktora
 - Poszczególne implementacje interfejsu Pawn niewiele się różnią, w związku z czym są trochę bez sensu
 - Innym podejściem, które być może uprości trochę w kodzie, będzie wprowadzenie obiektu Map<Player, PlayerPawns> pawnsByPlayer np. w klasie logiki symulacji. Dzięki temu Player nie będzie przechowywał pionków, ale logika symulacji już będzie wiedziała (równie dobrze może to być w Board)
