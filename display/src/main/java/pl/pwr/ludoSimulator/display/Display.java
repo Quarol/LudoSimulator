@@ -52,7 +52,7 @@ public class Display {
         this.renderNewDisplay();
         for (Player player : board.getPlayers()) {
             for (int i = 0; i < player.getBasePawns().size(); i++) {
-                setDisplayTableField(basePositions.getPosition(player, i), player.getId()+1);
+                setDisplayTableField(basePositions.getPosition(player.getId()+1, i), player.getId()+1);
             }
             for (Pawn pawn : player.getEndPawns()) {
                 setDisplayTableField(endPositions.getPosition(player, pawn), player.getId()+1);
