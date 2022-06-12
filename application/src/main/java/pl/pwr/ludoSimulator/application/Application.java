@@ -27,7 +27,7 @@ public class Application {
         actions.add(new MoveEndPawnAction());
         actions.add(new KillPawnAction());
 
-        Simulation simulation = new Simulation(new BoardInitializer(4).initialize(), actions);
+        Simulation simulation = new Simulation(new BoardInitializer(4).initialize(), actions, new Callback());
         simulation.start();
     }
 }
