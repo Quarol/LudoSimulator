@@ -18,6 +18,7 @@ public class TakeOutPawnAction implements Action {
         }
         return possible;
     }
+    // potrzeba sprawdzić, czy tam nie stoi pionek innego gracza i analogicznie w KillPawnAction sprawdzić, czy wyciągając pionek nie zabijemy kogoś
     @Override
     public Board execute(Board board, Player player, int roll) {
         if (isPossible(board, player, roll)) {
