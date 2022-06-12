@@ -18,6 +18,9 @@ public class Simulation {
         return board;
     }
 
+    public int random () {
+        return (int) Math.random();
+    }
     public void start () {
         int nrOfMoves = 0;
         Display display = new Display(board);
@@ -48,14 +51,14 @@ public class Simulation {
 
                     boolean wasActionAccomplished =  (possibleActions.size() != 0);
                     if (wasActionAccomplished) {
-                        int actionToExecute = (int) (Math.random() * possibleActions.size());
+                        int actionToExecute = random() * possibleActions.size();
                         List<Pawn> avaiblePawns = possibleActions.get(actionToExecute).getPawns();
-                        int pawnToPerformAction = (int) (Math.random() * avaiblePawns.size());
+                        int pawnToPerformAction = random() * avaiblePawns.size();
                         possibleActions.get(actionToExecute).execute(avaiblePawns.get(pawnToPerformAction));
                     }
 
                     if (canPawnKill) {
-                        int pawnWhichKills = (int) (Math.random() * pawnsWhichCanKill.size());
+                        int pawnWhichKills = (int) (random() * pawnsWhichCanKill.size());
                         killPawnBy.execute(pawnsWhichCanKill.get(pawnWhichKills));
                     }
 
