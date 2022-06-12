@@ -7,33 +7,31 @@ import pl.pwr.ludoSimulator.logic.Player;
 public class BasePositions {
     private final List<DisplayPosition> positions = new ArrayList<>();
     public void generatePositions (int playerId) {
+        int x = -1;
+        int y = -1;
         switch (playerId) {
             case 1 -> {
-                int x = 0;
-                int y = 0;
-                positions.add(new DisplayPosition(x, y));
-                positions.add(new DisplayPosition(x+1, y));
-                positions.add(new DisplayPosition(x, y+1));
-                positions.add(new DisplayPosition(x+1, y+1));
+                x = 0;
+                y = 0;
             }
             case 2 -> {
-                positions.add(new DisplayPosition(19, 0));
-                positions.add(new DisplayPosition(20, 0));
-                positions.add(new DisplayPosition(19, 1));
-                positions.add(new DisplayPosition(20, 1));
+                x = 19;
+                y = 0;
             }
             case 3 -> {
-                positions.add(new DisplayPosition(19, 9));
-                positions.add(new DisplayPosition(20, 9));
-                positions.add(new DisplayPosition(19, 10));
-                positions.add(new DisplayPosition(20, 10));
+                x = 19;
+                y = 9;
             }
             case 4 -> {
-                positions.add(new DisplayPosition(0, 9));
-                positions.add(new DisplayPosition(1, 9));
-                positions.add(new DisplayPosition(0, 10));
-                positions.add(new DisplayPosition(1, 10));
+                x = 0;
+                y = 9;
             }
+        }
+        if (x != -1 && y != -1) {
+            positions.add(new DisplayPosition(x, y));
+            positions.add(new DisplayPosition(x + 1, y));
+            positions.add(new DisplayPosition(x, y + 1));
+            positions.add(new DisplayPosition(x + 1, y + 1));
         }
     }
     public BasePositions () {
