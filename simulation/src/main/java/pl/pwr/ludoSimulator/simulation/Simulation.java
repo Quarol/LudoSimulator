@@ -10,8 +10,9 @@ import java.util.List;
 
 public class Simulation {
     private final Board board;
-    public Simulation (Board board) {
+    public Simulation (Board board, List<Action> actions) {
         this.board = board;
+        this.actions = actions;
     }
     public Board getBoard() {
         return board;
@@ -20,6 +21,7 @@ public class Simulation {
     public int random () {
         return (int) Math.random();
     }
+    private List<Action> actions;
     public void start () {
         int nrOfMoves = 0;
         Display display = new Display(board);
@@ -32,12 +34,6 @@ public class Simulation {
                 List<Action> possibleActions;
                 do {
                     roll = Dice.roll();
-
-                    List<Action> actions = new ArrayList<>();
-                    actions.add(new TakeOutPawnAction());
-                    actions.add(new MoveActivePawnAction());
-                    actions.add(new MoveEndPawnAction());
-                    actions.add(new KillPawnAction());
 
                     possibleActions = new ArrayList<>();
 
@@ -56,19 +52,6 @@ public class Simulation {
                         display.display();
                         nrOfMoves++;
                     }
-
-                    /*if (canPawnKill) {
-                        int pawnWhichKills = (int) (random() * pawnsWhichCanKill.size());
-                        killPawnBy.execute(pawnsWhichCanKill.get(pawnWhichKills));
-                    }
-
-                    if (wasActionAccomplished) {
-                        System.out.println();
-                        display.display();
-                        nrOfMoves++;
-                    }*/
-
-
                 } while (roll == 6);
             }
             }

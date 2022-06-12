@@ -1,9 +1,12 @@
 package pl.pwr.ludoSimulator.application;
 
+import pl.pwr.ludoSimulator.logic.actions.*;
 import pl.pwr.ludoSimulator.simulation.*;
 import pl.pwr.ludoSimulator.logic.*;
 import pl.pwr.ludoSimulator.display.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -16,8 +19,13 @@ public class Application {
         nrOfPLayers = scanner.nextInt();
         System.out.println("\n");*/
         nrOfPLayers = 2;
+        List<Action> actions = new ArrayList<>();
+        actions.add(new TakeOutPawnAction());
+        actions.add(new MoveActivePawnAction());
+        actions.add(new MoveEndPawnAction());
+        actions.add(new KillPawnAction());
 
-        Simulation simulation = new Simulation(new BoardInitializer(4).initialize());
+        Simulation simulation = new Simulation(new BoardInitializer(4).initialize(), actions);
         simulation.start();
         Display display = new Display(simulation.getBoard());
         display.display();
