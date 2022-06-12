@@ -15,8 +15,8 @@ public class Simulation {
         this.actions = actions;
         this.simulationCallback = simulationCallback;
     }
-    public int random () {
-        return (int) Math.random();
+    public int random (int scope) {
+        return (int) (Math.random()*scope);
     }
     private final List<Action> actions;
     public void start () {
@@ -48,7 +48,7 @@ public class Simulation {
         return possibleActions;
     }
     private void afterActionAccomplished (Board board, Player player, int roll, List<Action> possibleActions) {
-        int actionToExecute = random() * possibleActions.size();
+        int actionToExecute = random(possibleActions.size());
         possibleActions.get(actionToExecute).execute(board, player, roll);
     }
 }
