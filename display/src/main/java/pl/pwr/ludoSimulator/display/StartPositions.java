@@ -1,17 +1,18 @@
 package pl.pwr.ludoSimulator.display;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class StartPositions {
-    private final List<DisplayPosition> positions = new ArrayList<>();
-    public StartPositions () {
-        positions.add(new DisplayPosition(0,4));
-        positions.add(new DisplayPosition(12, 0));
-        positions.add(new DisplayPosition(20,6));
-        positions.add(new DisplayPosition(8,10));
-    }
-    public DisplayPosition get (int index) {
-        return this.positions.get(index);
+public enum StartPositions {
+    PLAYER1, PLAYER2, PLAYER3, PLAYER4;
+    public DisplayPosition getStartPosition() {
+        switch (this) {
+            case PLAYER1:
+                return new DisplayPosition(0,4);
+            case PLAYER2:
+                return new DisplayPosition(12, 0);
+            case PLAYER3:
+                return new DisplayPosition(20,6);
+            case PLAYER4:
+                return new DisplayPosition(8,10);
+        }
+        return new DisplayPosition(-1, -1);
     }
 }
