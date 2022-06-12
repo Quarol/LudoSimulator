@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class Board {
     private final List<Player> players;
-    public int getNumberOfPlayers() { return players.size(); }
     public List<Player> getPlayers () {
         return players;
     }
