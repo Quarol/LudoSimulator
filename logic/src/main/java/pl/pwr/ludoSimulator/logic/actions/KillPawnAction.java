@@ -37,19 +37,21 @@ public class KillPawnAction implements Action {
     public Board execute(Board board, Player player, int roll) {
         int endPosition = player.getEndPosition();
         List<Pawn> pawns = getPawns(board, player, roll);
-        Pawn pawn = pawns.get(pawns.size()-1);
-        if (pawn.getPosition()+roll < endPosition || pawn.getPosition() > endPosition) {
-            int position = (pawn.getPosition()+roll)%40;
-            for (Player currentPlayer : board.getActivePlayers()) {
-                for (Pawn p : player.getActivePawns()) {
-                    if (p.getPosition() == position) {
-                        currentPlayer.removeActivePawn(p);
-                        currentPlayer.addBasePawn(new Pawn());
-                        break;
+        if (pawns.size() != 0 ) {
+            Pawn pawn = pawns.get(0);
+            if (pawn.getPosition()+roll < endPosition || pawn.getPosition() > endPosition) {
+                int position = (pawn.getPosition()+roll)%40;
+                for (Player currentPlayer : board.getActivePlayers()) {
+                    for (Pawn p : currentPlayer.getActivePawns()) {
+                        if (p.getPosition() == position) {
+                            currentPlayer.removeActivePawn(p);
+                            currentPlayer.addBasePawn(new Pawn());
+                            break;
+                        }
                     }
                 }
+                pawn.setPosition((pawn.getPosition()+roll)%40);
             }
-            pawn.setPosition((pawn.getPosition()+roll)%40);
         }
         return board;
     }

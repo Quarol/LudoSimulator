@@ -28,7 +28,6 @@ public class Simulation {
 
         while (board.getActivePlayers().size() > 1) {
             for (Player player : board.getActivePlayers()) {
-
                 int roll;
                 List<Action> possibleActions;
                 do {

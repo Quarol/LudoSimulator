@@ -15,73 +15,69 @@ public class GameTest {
             int roll = 6;
             Action action = new TakeOutPawnAction();
             if (action.isPossible(board, player, roll)) {
-                action.execute(new Pawn(player.getStartPosition()));
+                action.execute(board, player, roll);
             }
         }
-        display.display();
         for (int i = 0; i < 7; i++) {
             for (Player player : board.getPlayers()) {
-                int roll = Dice.roll();
-                roll = 6;
                 Action action = new MoveActivePawnAction();
                 if (action.isPossible(board, player, 6)) {
-                    action.execute(action.getPawns().get(0));
+                    action.execute(board, player, 6);
                 }
             }
         }
         Action action = new TakeOutPawnAction();
         action.isPossible(board, board.getPlayer(0), 6);
-        action.execute(new Pawn(0));
+        action.execute(board, board.getPlayer(0), 6);
+        action = new MoveActivePawnAction();
+        action.isPossible(board, board.getPlayer(0), 6);
+        action.execute(board, board.getPlayer(0), 6);
 
         action = new MoveActivePawnAction();
         action.isPossible(board, board.getPlayer(0), 6);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 6);
 
         action = new MoveActivePawnAction();
         action.isPossible(board, board.getPlayer(0), 6);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 6);
 
         action = new MoveActivePawnAction();
         action.isPossible(board, board.getPlayer(0), 6);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 6);
 
         action = new MoveActivePawnAction();
         action.isPossible(board, board.getPlayer(0), 6);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 6);
 
         action = new MoveActivePawnAction();
         action.isPossible(board, board.getPlayer(0), 6);
-        action.execute(action.getPawns().get(0));
-
-        action = new MoveActivePawnAction();
-        action.isPossible(board, board.getPlayer(0), 6);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 6);
 
         action = new MoveActivePawnAction();
         action.isPossible(board, board.getPlayer(0), 5);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 5);
 
         action = new MoveEndPawnAction();
         if (action.isPossible(board, board.getPlayer(0), 1)) {
-            action.execute(action.getPawns().get(0));
+            action.execute(board, board.getPlayer(0), 1);
         }
         action = new TakeOutPawnAction();
         action.isPossible(board, board.getPlayer(0), 6);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 6);
         action = new TakeOutPawnAction();
         action.isPossible(board, board.getPlayer(1), 6);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(1), 6);
         action = new MoveActivePawnAction();
         action.isPossible(board, board.getPlayer(0), 6);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 6);
 
         action = new KillPawnAction();
         action.isPossible(board, board.getPlayer(0), 4);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 4);
 
         action = new MoveActivePawnAction();
         action.isPossible(board, board.getPlayer(0), 4);
-        action.execute(action.getPawns().get(0));
+        action.execute(board, board.getPlayer(0), 4);
         display.display();
         assertEquals("\n" +
                 "1       O O V      22 \n" +
