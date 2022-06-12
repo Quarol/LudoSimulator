@@ -1,8 +1,8 @@
 package pl.pwr.ludoSimulator.logic;
 
 public class Player  {
-    private int id;
-    private int startPosition;
+    private final int id;
+    private final int startPosition;
     private final int endPosition;
 
     public int getStartPosition() {
