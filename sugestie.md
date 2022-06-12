@@ -9,25 +9,7 @@ BoardState execute(BoardState boardState, Player player); // akcja przyjmuje obe
 ```
 
 - klasa z logiką symulacji zależy od klasy odpowiedzialnej za wyświetlanie (Simulation -> Display) - uczulałem na zajęciach, żeby tak nie robić. Wyświetlanie może być, ale np w klasie Application. Klasy symulacji nie powinny nic wiedzieć na temat wyświetlania
-- Zbyt dużo zahardkodowanych wartości , np
-
-``
-case 0 -> {
-this.startPosition = 0;
-this.endPosition = 39;
-}
-case 1 -> {
-this.startPosition = 10;
-this.endPosition = 9;
-}
-case 2 -> {
-this.startPosition = 20;
-this.endPosition = 19;
-}
-case 3 -> {
-this.startPosition = 30;
-this.endPosition = 29;
-}
+- Zbyt dużo zahardkodowanych wartości
 ``
 - proszę się zastanowić jak uczynić ten kod bardziej uniwersalnym, niezależnym od wpisanych na stałę liczb
 
