@@ -22,18 +22,11 @@ public class TakeOutPawnAction implements Action {
         }
         return possible;
     }
-    private List<Pawn> getPawns (Board board, Player player, int roll) {
-        List<Pawn> list = new ArrayList<>();
-        list.add(new Pawn(player.getStartPosition()));
-        return list;
-    }
     @Override
     public Board execute(Board board, Player player, int roll) {
-        List<Pawn> pawns = getPawns(board, player, roll);
-        if (pawns.size() != 0) {
+        if (isPossible(board, player, roll)) {
             board.getPlayerPawns(player).removeBasePawn();
-            board.getPlayerPawns(player).setBasePawns(board.getPlayerPawns(player).getBasePawns());
-            board.getPlayerPawns(player).addActivePawn(pawns.get(0));
+            board.getPlayerPawns(player).addActivePawn(new Pawn(player.getStartPosition()));
         }
         return board;
     }
