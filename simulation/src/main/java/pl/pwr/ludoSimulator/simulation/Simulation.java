@@ -8,7 +8,6 @@ import pl.pwr.ludoSimulator.display.Display;
 import java.util.ArrayList;
 import java.util.List;
 
-//@SuppressWarnings("ALL")
 public class Simulation {
     private final Board board;
     public Simulation (Board board) {
@@ -52,9 +51,9 @@ public class Simulation {
                     boolean wasActionAccomplished =  (possibleActions.size() != 0);
                     if (wasActionAccomplished) {
                         int actionToExecute = random() * possibleActions.size();
-                        List<Pawn> avaiblePawns = possibleActions.get(actionToExecute).getPawns();
-                        int pawnToPerformAction = random() * avaiblePawns.size();
-                        possibleActions.get(actionToExecute).execute(avaiblePawns.get(pawnToPerformAction));
+                        List<Pawn> availablePawns = possibleActions.get(actionToExecute).getPawns();
+                        int pawnToPerformAction = random() * availablePawns.size();
+                        possibleActions.get(actionToExecute).execute(availablePawns.get(pawnToPerformAction));
                     }
 
                     if (canPawnKill) {
