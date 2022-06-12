@@ -10,7 +10,6 @@ BoardState execute(BoardState boardState, Player player); // akcja przyjmuje obe
 
 - klasa z logiką symulacji zależy od klasy odpowiedzialnej za wyświetlanie (Simulation -> Display) - uczulałem na zajęciach, żeby tak nie robić. Wyświetlanie może być, ale np w klasie Application. Klasy symulacji nie powinny nic wiedzieć na temat wyświetlania
 - Zbyt dużo zahardkodowanych wartości
-``
 - proszę się zastanowić jak uczynić ten kod bardziej uniwersalnym, niezależnym od wpisanych na stałę liczb
 
 Z Eportalu:
@@ -25,4 +24,4 @@ Z Teams:
 
 - zahardcodowane liczby i generalnie klasa BasePosition cała do przeprojektowania
 
-- konstuktory powinny byc jak najmniejsze, za stworzenie skomplikowane instancji danej klasy moze odpowiadac inna klasa, np BoardCreator
+- konstruktory powinny byc jak najmniejsze, za stworzenie skomplikowane instancji danej klasy moze odpowiadac inna klasa, np BoardCreator

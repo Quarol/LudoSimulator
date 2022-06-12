@@ -4,18 +4,13 @@ import pl.pwr.ludoSimulator.logic.*;
 
 import java.util.ArrayList;
 import java.util.List;
-public class KillPawnAction implements Action{
-    private boolean possible;
-    private int steps;
-    private Player player;
-    private Board board;
-    private List<Pawn> pawns = new ArrayList<>();
+public class KillPawnAction implements Action {
     @Override
     public boolean isPossible(Board board, Player player, int roll) {
-        this.player = player;
-        player = (Player) player.clone();
-        this.steps = roll;
-        this.board = board;
+        return getPawns(board, player, roll).size() != 0;
+    }
+
+    private List<Pawn> getPawns(Board board, Player player, int roll) {
         List<Integer> usedPositions = new ArrayList<>();
         List<Integer> otherPlayersUsedPositions = new ArrayList<>();
         List<Pawn> activePawnsWhichCanKill = new ArrayList<>();
@@ -35,30 +30,27 @@ public class KillPawnAction implements Action{
                 }
             }
         }
-        this.pawns = activePawnsWhichCanKill;
-        return this.possible = activePawnsWhichCanKill.size() != 0;
-    }
-
-    public List<Pawn> getPawns() {
-        return pawns;
+        return activePawnsWhichCanKill;
     }
 
     @Override
-    public Board execute(Pawn pawn) {
+    public Board execute(Board board, Player player, int roll) {
         int endPosition = player.getEndPosition();
-        if (pawn.getPosition()+steps < endPosition || pawn.getPosition() > endPosition) {
-            int position = (pawn.getPosition()+steps)%40;
-            for (Player player : board.getActivePlayers()) {
+        List<Pawn> pawns = getPawns(board, player, roll);
+        Pawn pawn = pawns.get(pawns.size()-1);
+        if (pawn.getPosition()+roll < endPosition || pawn.getPosition() > endPosition) {
+            int position = (pawn.getPosition()+roll)%40;
+            for (Player currentPlayer : board.getActivePlayers()) {
                 for (Pawn p : player.getActivePawns()) {
                     if (p.getPosition() == position) {
-                        player.removeActivePawn(p);
-                        player.addBasePawn(new Pawn());
+                        currentPlayer.removeActivePawn(p);
+                        currentPlayer.addBasePawn(new Pawn());
                         break;
                     }
                 }
             }
-            pawn.setPosition((pawn.getPosition()+steps)%40);
+            pawn.setPosition((pawn.getPosition()+roll)%40);
         }
-        return this.board;
+        return board;
     }
 }

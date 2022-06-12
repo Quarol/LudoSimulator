@@ -8,7 +8,6 @@ import java.util.List;
 
 
 public interface Action {
-    List<Pawn> getPawns();
     boolean isPossible(Board board, Player player, int roll);
-    Board execute(Pawn pawn);
+    Board execute(Board board, Player player, int roll);
 }
