@@ -13,6 +13,6 @@ public enum StartPositions {
             case PLAYER4:
                 return new DisplayPosition(8,10);
         }
-        return new DisplayPosition(-1, -1);
+        return null;
     }
 }

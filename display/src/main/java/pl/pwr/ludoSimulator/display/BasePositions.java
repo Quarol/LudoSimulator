@@ -42,6 +42,6 @@ public class BasePositions {
                 return new DisplayPosition(x+1, y+1);
             }
         }
-        return new DisplayPosition(-1, -1);
+        return null;
     }
 }
