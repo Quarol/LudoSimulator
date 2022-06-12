@@ -29,7 +29,5 @@ public class Application {
 
         Simulation simulation = new Simulation(new BoardInitializer(4).initialize(), actions);
         simulation.start();
-        Display display = new Display(simulation.getBoard());
-        display.display();
     }
 }

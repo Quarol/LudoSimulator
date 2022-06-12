@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Simulation {
     private final Board board;
-    public Simulation (Board board, List<Action> actions) {
+    public Simulation (Board board, List<Action> actions, SimulationCallback simulationCallback) {
         this.board = board;
         this.actions = actions;
     }
