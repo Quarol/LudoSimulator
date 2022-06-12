@@ -37,10 +37,8 @@ public class Simulation {
                     actions.add(new TakeOutPawnAction());
                     actions.add(new MoveActivePawnAction());
                     actions.add(new MoveEndPawnAction());
-                    KillPawnAction killPawnBy = new KillPawnAction();
+                    actions.add(new KillPawnAction());
 
-                    boolean canPawnKill = killPawnBy.isPossible(board, player, roll);
-                    List<Pawn> pawnsWhichCanKill = killPawnBy.getPawns();
                     possibleActions = new ArrayList<>();
 
                     for (Action action : actions) {
@@ -54,9 +52,12 @@ public class Simulation {
                         List<Pawn> availablePawns = possibleActions.get(actionToExecute).getPawns();
                         int pawnToPerformAction = random() * availablePawns.size();
                         possibleActions.get(actionToExecute).execute(availablePawns.get(pawnToPerformAction));
+                        System.out.println();
+                        display.display();
+                        nrOfMoves++;
                     }
 
-                    if (canPawnKill) {
+                    /*if (canPawnKill) {
                         int pawnWhichKills = (int) (random() * pawnsWhichCanKill.size());
                         killPawnBy.execute(pawnsWhichCanKill.get(pawnWhichKills));
                     }
@@ -65,7 +66,7 @@ public class Simulation {
                         System.out.println();
                         display.display();
                         nrOfMoves++;
-                    }
+                    }*/
 
 
                 } while (roll == 6);
