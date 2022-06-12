@@ -42,7 +42,6 @@ Z Eportalu:
 
 Z Teams:
 - spodziewałbym się, że wprowadzą Panowie interfejs Action, aby symulacja nie wiedziała nic o możliwych akcjach (a więc spełniała O w SOLID) i można byłoby je dowolnie dodawać. Interfejs akcji mógłby przyjmować na wejściu stan planszy i po jej wykonaniu, zwracać nowy stan
-- klasa Dice powinna mieć zasłonięty konstuktor
 
 - zahardcodowane liczby i generalnie klasa BasePosition cała do przeprojektowania
 
