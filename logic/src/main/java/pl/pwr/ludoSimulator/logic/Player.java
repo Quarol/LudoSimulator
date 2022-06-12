@@ -1,10 +1,11 @@
 package pl.pwr.ludoSimulator.logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Player  {
-    private List<Pawn> basePawns = new ArrayList<>();
+    private List<Pawn> basePawns = new ArrayList<>(Arrays.asList(new Pawn(), new Pawn(), new Pawn(), new Pawn()));
     private final List<Pawn> activePawns = new ArrayList<>();
     private final List<Pawn> endPawns = new ArrayList<>();
 
@@ -71,9 +72,5 @@ public class Player  {
         Player.counter++;
         this.startPosition = StartPositions.values()[this.id].getStartPosition();
         this.endPosition = Math.floorMod(startPosition-1, 40);
-        this.basePawns.add(new Pawn());
-        this.basePawns.add(new Pawn());
-        this.basePawns.add(new Pawn());
-        this.basePawns.add(new Pawn());
     }
 }
