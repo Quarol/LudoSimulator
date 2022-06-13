@@ -18,12 +18,20 @@ public class TakeOutPawnAction implements Action {
         }
         return possible;
     }
-    // potrzeba sprawdzić, czy tam nie stoi pionek innego gracza i analogicznie w KillPawnAction sprawdzić, czy wyciągając pionek nie zabijemy kogoś
     @Override
     public Board execute(Board board, Player player, int roll) {
         if (isPossible(board, player, roll)) {
             board.getPlayerPawns(player).removeBasePawn();
             board.getPlayerPawns(player).addActivePawn(new Pawn(player.getStartPosition()));
+            for (Player currentPlayer : board.getActivePlayers()) {
+                if (currentPlayer.getId() != player.getId()) {
+                    for (Pawn pawn : board.getPlayerPawns(currentPlayer).getActivePawns()) {
+                        if (player.getStartPosition() == pawn.getPosition()) {
+                            board.getPlayerPawns(currentPlayer).removeActivePawn(pawn);
+                        }
+                    }
+                }
+            }
         }
         return board;
     }
