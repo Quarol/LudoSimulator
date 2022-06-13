@@ -29,6 +29,7 @@ public class TakeOutPawnAction implements Action {
                         if (player.getStartPosition() == pawn.getPosition()) {
                             board.getPlayerPawns(currentPlayer).removeActivePawn(pawn);
                             board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());
+                            break;
                         }
                     }
                 }
