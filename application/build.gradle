@@ -2,7 +2,15 @@ plugins {
     id 'java'
     id 'application'
 }
-
+if (hasProperty('buildScan')) {
+    buildScan {
+        termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+        termsOfServiceAgree = 'yes'
+    }
+}
+run {
+    standardInput = System.in
+}
 group 'org.example'
 version '1.0-SNAPSHOT'
 
