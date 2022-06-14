@@ -8,12 +8,14 @@ import pl.pwr.ludoSimulator.logic.Player;
 
 public class EndPositions {
     private final List<DisplayPosition> positions = new ArrayList<>();
+    private static final int X_DIFFERENCE = 8;
+    private static final int Y_DIFFERENCE = 4;
     private static final int MIN_X = 2;
-    private static final int MID_X = 10;
-    private static final int MAX_X = 18;
+    private static final int MID_X = MIN_X + X_DIFFERENCE;
+    private static final int MAX_X = MIN_X + X_DIFFERENCE*2;
     private static final int MIN_Y = 1;
-    private static final int MID_Y = 5;
-    private static final int MAX_Y = 9;
+    private static final int MID_Y = MIN_Y + Y_DIFFERENCE;
+    private static final int MAX_Y = MIN_Y + Y_DIFFERENCE*2;
     public EndPositions () {
 
         int x = MIN_X;
