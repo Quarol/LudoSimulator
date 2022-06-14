@@ -9,22 +9,30 @@ import pl.pwr.ludoSimulator.logic.Player;
 public class EndPositions {
     private final List<DisplayPosition> positions = new ArrayList<>();
     public EndPositions () {
-        positions.add(new DisplayPosition(2,5));
-        positions.add(new DisplayPosition(4, 5));
-        positions.add(new DisplayPosition(6, 5));
-        positions.add(new DisplayPosition(8, 5));
-        positions.add(new DisplayPosition(10,1));
-        positions.add(new DisplayPosition(10, 2));
-        positions.add(new DisplayPosition(10, 3));
-        positions.add(new DisplayPosition(10, 4));
-        positions.add(new DisplayPosition(18,5));
-        positions.add(new DisplayPosition(16, 5));
-        positions.add(new DisplayPosition(14, 5));
-        positions.add(new DisplayPosition(12, 5));
-        positions.add(new DisplayPosition(10,9));
-        positions.add(new DisplayPosition(10, 8));
-        positions.add(new DisplayPosition(10, 7));
-        positions.add(new DisplayPosition(10, 6));
+
+        int x = 2;
+        int y = 5;
+        for (int i = x; i <= 8; i += 2) {
+            positions.add(new DisplayPosition(i, y));
+        }
+
+        x = 10;
+        y = 1;
+        for (int j = y; j <= 4; ++j){
+            positions.add(new DisplayPosition(x, j));
+        }
+
+        x = 18;
+        y = 5;
+        for (int i = x; i >= 12; i -= 2) {
+            positions.add(new DisplayPosition(i, y));
+        }
+
+        x = 10;
+        y = 9;
+        for (int j = y; j >= 6; --j){
+            positions.add(new DisplayPosition(x, j));
+        }
     }
     public DisplayPosition get (int index) {
         return this.positions.get(index);
