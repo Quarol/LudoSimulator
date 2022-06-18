@@ -6,6 +6,7 @@ import pl.pwr.ludoSimulator.logic.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class MoveEndPawnAction implements Action {
     @Override
@@ -14,10 +15,7 @@ public class MoveEndPawnAction implements Action {
     }
 
     private List<Pawn> getPawns(Board board, Player player, int roll) {
-        List<Integer> usedPositions = new ArrayList<>();
-        for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
-            usedPositions.add(pawn.getPosition());
-        }
+        List<Integer> usedPositions = board.getPlayerPawns(player).getEndPawns().stream().flatMap(pawn -> Stream.of(pawn.getPosition())).toList();
         return board.getPlayerPawns(player).getEndPawns().stream()
                 .filter(pawn -> (pawn.getPosition() + roll < 4 && !usedPositions.contains(pawn.getPosition() + roll))).toList();
     }
