@@ -15,16 +15,11 @@ public class MoveEndPawnAction implements Action {
     }
     private List<Pawn> getPawns (Board board, Player player, int roll) {
         List<Integer> usedPositions = new ArrayList<>();
-        List<Pawn> endPawnsWhichCanMove = new ArrayList<>();
         for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
             usedPositions.add(pawn.getPosition());
         }
-        for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
-            if (pawn.getPosition()+roll < 4 && !usedPositions.contains(pawn.getPosition()+roll)) {
-                endPawnsWhichCanMove.add(pawn);
-            }
-        }
-        return endPawnsWhichCanMove;
+        return board.getPlayerPawns(player).getEndPawns().stream()
+                .filter(pawn -> (pawn.getPosition()+roll < 4 && !usedPositions.contains(pawn.getPosition()+roll))).toList();
     }
     @Override
     public Board execute(Board board, Player player, int roll) {
