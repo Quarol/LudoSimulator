@@ -4,6 +4,9 @@ import pl.pwr.ludoSimulator.logic.Board;
 import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.logic.Player;
 
+import java.util.List;
+import java.util.Optional;
+
 public class TakeOutPawnAction implements Action {
     @Override
     public boolean isPossible(Board board, Player player, int roll) {
@@ -15,20 +18,18 @@ public class TakeOutPawnAction implements Action {
         }
         return board.getPlayerPawns(player).getBasePawns().size() != 0;
     }
+
     @Override
     public Board execute(Board board, Player player, int roll) {
         if (isPossible(board, player, roll)) {
             board.getPlayerPawns(player).removeBasePawn();
             board.getPlayerPawns(player).addActivePawn(new Pawn(player.startPosition()));
-            for (Player currentPlayer : board.getActivePlayers()) {
-                if (currentPlayer.id() != player.id()) {
-                    for (Pawn pawn : board.getPlayerPawns(currentPlayer).getActivePawns()) {
-                        if (player.startPosition() == pawn.getPosition()) {
-                            board.getPlayerPawns(currentPlayer).removeActivePawn(pawn);
-                            board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());
-                            break;
-                        }
-                    }
+            List<Player> otherPlayers = board.getPlayers().stream().filter(p -> !p.equals(player)).toList();
+            for (Player currentPlayer : otherPlayers) {
+                Optional<Pawn> otherPawn = board.getPlayerPawns(currentPlayer).getActivePawns().stream().filter(pawn -> player.startPosition() == pawn.getPosition()).findFirst()   ;
+                if (otherPawn.isPresent()) {
+                    board.getPlayerPawns(currentPlayer).removeActivePawn(otherPawn.get());
+                    board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());
                 }
             }
         }
