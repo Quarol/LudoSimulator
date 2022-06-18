@@ -8,29 +8,20 @@ import java.util.List;
 public class KillPawnAction implements Action {
     private List<Integer> getPositionsOccupiedByAnotherPlayers(Board board, Player actionPerformer) {
         List<Integer> otherPlayersUsedPositions = new ArrayList<>();
-        for (Player player : board.getPlayers()) {
-            if (!player.equals(actionPerformer)) {
-                for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
-                    otherPlayersUsedPositions.add(pawn.getPosition());
-                }
+        List<Player> otherPlayers = board.getPlayers().stream().filter(p -> !p.equals(actionPerformer)).toList();
+        for (Player player : otherPlayers) {
+            for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
+                otherPlayersUsedPositions.add(pawn.getPosition());
             }
         }
         return otherPlayersUsedPositions;
     }
 
     private List<Pawn> findPawnsWhichCanKill(Board board, Player actionPerformer, int roll, List<Integer> positionsOccupiedByAnotherPlayers) {
-        List<Pawn> activePawnsWhichCanKill = new ArrayList<>();
-        List<Pawn> actionPerformerPawns = board.getPlayerPawns(actionPerformer).getActivePawns();
-        for (Pawn pawn : actionPerformerPawns) {
-            if (positionsOccupiedByAnotherPlayers.contains((pawn.getPosition() + roll) % 40)) {
-                if (pawn.getPosition() + roll < actionPerformer.endPosition()) {
-                    activePawnsWhichCanKill.add(pawn);
-                } else if (pawn.getPosition() > actionPerformer.endPosition()) {
-                    activePawnsWhichCanKill.add(pawn);
-                }
-            }
-        }
-        return activePawnsWhichCanKill;
+        return board.getPlayerPawns(actionPerformer).getActivePawns().stream()
+                .filter(pawn -> positionsOccupiedByAnotherPlayers.contains((pawn.getPosition() + roll) % 40))
+                .filter(pawn -> (pawn.getPosition() + roll < actionPerformer.endPosition() || pawn.getPosition() > actionPerformer.endPosition()))
+                .toList();
     }
 
     @Override

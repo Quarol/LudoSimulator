@@ -3,7 +3,6 @@ package pl.pwr.ludoSimulator.simulation;
 import pl.pwr.ludoSimulator.logic.*;
 import pl.pwr.ludoSimulator.logic.actions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
