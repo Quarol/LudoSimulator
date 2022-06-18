@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class Simulation {
     private final Board board;
+    private final List<Action> actions;
     private final SimulationCallback simulationCallback;
 
     public Simulation(Board board, List<Action> actions, SimulationCallback simulationCallback) {
@@ -20,9 +21,6 @@ public class Simulation {
     public int random(int scope) {
         return (int) (Math.random() * scope);
     }
-
-    private final List<Action> actions;
-
     public void start() {
         while (board.hasAnyActivePlayer()) {
             for (Player player : board.getActivePlayers()) {
@@ -30,6 +28,7 @@ public class Simulation {
                 do {
                     roll = Dice.roll();
                     executeRandomAction(board, player, roll);
+                    simulationCallback.callbackAfterMove();
                 } while (roll == 6);
             }
             simulationCallback.callbackAfterRound();
@@ -48,7 +47,6 @@ public class Simulation {
         if (thereAreAnyActions) {
             int actionToExecute = random(possibleActions.size());
             possibleActions.get(actionToExecute).execute(board, player, roll);
-            simulationCallback.callbackAfterMove();
         }
     }
 }
