@@ -6,18 +6,14 @@ import pl.pwr.ludoSimulator.logic.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MoveActivePawnAction implements Action {
     private List<Pawn> getPawns(Board board, Player player, int roll) {
         List<Integer> usedEndPositions = getUsedEndPositions(board, player);
-        for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
-            usedEndPositions.add(pawn.getPosition());
-        }
-        List<Integer> usedPositions = new ArrayList<>();
+        List<Integer> usedPositions = getUsedActivePositions(board, player);
         List<Pawn> activePawnsWhichCanMove = new ArrayList<>();
-        for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
-            usedPositions.add(pawn.getPosition());
-        }
         for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
             if (!usedPositions.contains((pawn.getPosition() + roll) % 40)) {
                 if (pawn.getPosition() + roll < player.endPosition()) {
@@ -35,13 +31,11 @@ public class MoveActivePawnAction implements Action {
     }
 
     private List<Integer> getUsedEndPositions(Board board, Player player) {
-        List<Integer> usedEndPositions = new ArrayList<>();
-        for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
-            usedEndPositions.add(pawn.getPosition());
-        }
-        return usedEndPositions;
+        return board.getPlayerPawns(player).getEndPawns().stream().flatMap(pawn -> Stream.of(pawn.getPosition())).collect(Collectors.toList());
     }
-
+    private List<Integer> getUsedActivePositions (Board board, Player player) {
+        return board.getPlayerPawns(player).getActivePawns().stream().flatMap(pawn -> Stream.of(pawn.getPosition())).collect(Collectors.toList());
+    }
     @Override
     public boolean isPossible(Board board, Player player, int roll) {
         return getPawns(board, player, roll).size() != 0;
