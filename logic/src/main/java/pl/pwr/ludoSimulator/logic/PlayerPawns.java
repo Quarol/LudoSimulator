@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PlayerPawns {
-    private List<Pawn> basePawns = new ArrayList<>(Arrays.asList(new Pawn(), new Pawn(), new Pawn(), new Pawn()));
+    private final List<Pawn> basePawns = new ArrayList<>(Arrays.asList(new Pawn(), new Pawn(), new Pawn(), new Pawn()));
     private final List<Pawn> activePawns = new ArrayList<>();
     private final List<Pawn> endPawns = new ArrayList<>();
     public List<Pawn> getEndPawns() {

@@ -1,24 +1,15 @@
 package pl.pwr.ludoSimulator.logic;
 
-public class Player  {
-    private final int id;
-    private final int startPosition;
-    private final int endPosition;
+public record Player(int id, int startPosition, int endPosition) {
 
-    public int getStartPosition() {
-        return startPosition;
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Player player = (Player) o;
+        return id == player.id;
     }
 
-    public int getEndPosition() {
-        return endPosition;
-    }
-
-    public int getId() {
-        return id;
-    }
-    public Player(int id, int startPosition, int endPosition) {
-        this.id = id;
-        this.startPosition = startPosition;
-        this.endPosition = endPosition;
-    }
 }

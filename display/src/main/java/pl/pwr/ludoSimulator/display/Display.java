@@ -2,6 +2,7 @@ package pl.pwr.ludoSimulator.display;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import pl.pwr.ludoSimulator.logic.Board;
 import pl.pwr.ludoSimulator.logic.Pawn;
 import pl.pwr.ludoSimulator.logic.Player;
@@ -13,13 +14,16 @@ public class Display {
     private final EndPositions endPositions = new EndPositions();
     private final ActivePositions activePositions = new ActivePositions();
     private final StartPositions[] startPositions = StartPositions.values();
-    private void setDisplayTableField (DisplayPosition position, char value) {
-        this.displayTable.get(position.getX()).set(position.getY(), value);
+
+    private void setDisplayTableField(DisplayPosition position, char value) {
+        this.displayTable.get(position.x()).set(position.y(), value);
     }
-    private void setDisplayTableField (DisplayPosition position, int value) {
-        this.displayTable.get(position.getX()).set(position.getY(), Character.forDigit(value, 10));
+
+    private void setDisplayTableField(DisplayPosition position, int value) {
+        this.displayTable.get(position.x()).set(position.y(), Character.forDigit(value, 10));
     }
-    public Display (Board board) {
+
+    public Display(Board board) {
         this.board = board;
         for (int i = 0; i < 22; i++) {
             this.displayTable.add(new ArrayList<>());
@@ -29,7 +33,8 @@ public class Display {
             }
         }
     }
-    private void renderNewDisplay () {
+
+    private void renderNewDisplay() {
         for (int i = 0; i < 22; i++) {
             this.displayTable.add(new ArrayList<>());
             for (int j = 0; j < 11; j++) {
@@ -48,24 +53,27 @@ public class Display {
             setDisplayTableField(endPositions.get(i), 'X');
         }
     }
-    private void renderDisplay () {
+
+    private void renderDisplay() {
         this.renderNewDisplay();
         for (Player player : board.getPlayers()) {
             for (int i = 0; i < board.getPlayerPawns(player).getBasePawns().size(); i++) {
-                setDisplayTableField(basePositions.getPosition(player.getId()+1, i), player.getId()+1);
+                setDisplayTableField(basePositions.getPosition(player.id() + 1, i), player.id() + 1);
             }
             for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
-                setDisplayTableField(endPositions.getPosition(player, pawn), player.getId()+1);
+                setDisplayTableField(endPositions.getPosition(player, pawn), player.id() + 1);
             }
             for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
-                setDisplayTableField(activePositions.get(pawn), player.getId()+1);
+                setDisplayTableField(activePositions.get(pawn), player.id() + 1);
             }
         }
     }
-    public void display () {
+
+    public void display() {
         System.out.println(this);
     }
-    public String toString () {
+
+    public String toString() {
         renderDisplay();
         StringBuilder str = new StringBuilder();
         str.append("\n");

@@ -1,10 +1,6 @@
 package pl.pwr.ludoSimulator.display;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BasePositions {
-    private final List<DisplayPosition> positions = new ArrayList<>();
     public DisplayPosition getPosition (int playerId, int pawnPosition) {
         int x = -1;
         int y = -1;

@@ -12,11 +12,12 @@ public class EndPositions {
     private static final int Y_DIFFERENCE = 4;
     private static final int MIN_X = 2;
     private static final int MID_X = MIN_X + X_DIFFERENCE;
-    private static final int MAX_X = MIN_X + X_DIFFERENCE*2;
+    private static final int MAX_X = MIN_X + X_DIFFERENCE * 2;
     private static final int MIN_Y = 1;
     private static final int MID_Y = MIN_Y + Y_DIFFERENCE;
-    private static final int MAX_Y = MIN_Y + Y_DIFFERENCE*2;
-    public EndPositions () {
+    private static final int MAX_Y = MIN_Y + Y_DIFFERENCE * 2;
+
+    public EndPositions() {
 
         int x = MIN_X;
         int y = MID_Y;
@@ -26,7 +27,7 @@ public class EndPositions {
 
         x = MID_X;
         y = MIN_Y;
-        for (int j = y; j <= 4; ++j){
+        for (int j = y; j <= 4; ++j) {
             positions.add(new DisplayPosition(x, j));
         }
 
@@ -38,15 +39,17 @@ public class EndPositions {
 
         x = MID_X;
         y = MAX_Y;
-        for (int j = y; j >= 6; --j){
+        for (int j = y; j >= 6; --j) {
             positions.add(new DisplayPosition(x, j));
         }
     }
-    public DisplayPosition get (int index) {
+
+    public DisplayPosition get(int index) {
         return this.positions.get(index);
     }
-    public DisplayPosition getPosition (Player player, Pawn pawn) {
-        int playerId = player.getId();
-        return positions.get(playerId*4+ pawn.getPosition());
+
+    public DisplayPosition getPosition(Player player, Pawn pawn) {
+        int playerId = player.id();
+        return positions.get(playerId * 4 + pawn.getPosition());
     }
 }

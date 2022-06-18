@@ -20,13 +20,13 @@ public class MoveActivePawnAction implements Action {
         }
         for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
             if (!usedPositions.contains((pawn.getPosition() + roll) % 40)) {
-                if (pawn.getPosition() + roll < player.getEndPosition()) {
+                if (pawn.getPosition() + roll < player.endPosition()) {
                     activePawnsWhichCanMove.add(pawn);
-                } else if (pawn.getPosition() > player.getEndPosition()) {
+                } else if (pawn.getPosition() > player.endPosition()) {
                     activePawnsWhichCanMove.add(pawn);
-                } else if (pawn.getPosition() < player.getEndPosition() && pawn.getPosition() + roll > player.getEndPosition()
-                        && pawn.getPosition() + roll - player.getEndPosition() < 5
-                        && !usedEndPositions.contains(pawn.getPosition() + roll - player.getEndPosition() - 1)) {
+                } else if (pawn.getPosition() < player.endPosition() && pawn.getPosition() + roll > player.endPosition()
+                        && pawn.getPosition() + roll - player.endPosition() < 5
+                        && !usedEndPositions.contains(pawn.getPosition() + roll - player.endPosition() - 1)) {
                     activePawnsWhichCanMove.add(pawn);
                 }
             }
@@ -34,13 +34,14 @@ public class MoveActivePawnAction implements Action {
         return activePawnsWhichCanMove;
     }
 
-    private List<Integer> getUsedEndPositions (Board board, Player player) {
+    private List<Integer> getUsedEndPositions(Board board, Player player) {
         List<Integer> usedEndPositions = new ArrayList<>();
         for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
             usedEndPositions.add(pawn.getPosition());
         }
         return usedEndPositions;
     }
+
     @Override
     public boolean isPossible(Board board, Player player, int roll) {
         return getPawns(board, player, roll).size() != 0;
@@ -48,19 +49,19 @@ public class MoveActivePawnAction implements Action {
 
     @Override
     public Board execute(Board board, Player player, int roll) {
-        int endPosition = player.getEndPosition();
+        int endPosition = player.endPosition();
         List<Integer> usedEndPositions = getUsedEndPositions(board, player);
         List<Pawn> pawns = getPawns(board, player, roll);
         if (pawns.size() != 0) {
             Pawn pawn = pawns.get(0);
-        if (pawn.getPosition() + roll < endPosition || pawn.getPosition() > endPosition) {
-            pawn.setPosition((pawn.getPosition() + roll) % 40);
-        } else if (pawn.getPosition() < endPosition && pawn.getPosition() + roll > endPosition) {
-            if (pawn.getPosition() + roll - endPosition < 5 && !usedEndPositions.contains(pawn.getPosition() + roll - endPosition - 1)) {
-                board.getPlayerPawns(player).removeActivePawn(pawn);
-                board.getPlayerPawns(player).addEndPawn(new Pawn(pawn.getPosition() + roll - endPosition - 1));
+            if (pawn.getPosition() + roll < endPosition || pawn.getPosition() > endPosition) {
+                pawn.setPosition((pawn.getPosition() + roll) % 40);
+            } else if (pawn.getPosition() < endPosition && pawn.getPosition() + roll > endPosition) {
+                if (pawn.getPosition() + roll - endPosition < 5 && !usedEndPositions.contains(pawn.getPosition() + roll - endPosition - 1)) {
+                    board.getPlayerPawns(player).removeActivePawn(pawn);
+                    board.getPlayerPawns(player).addEndPawn(new Pawn(pawn.getPosition() + roll - endPosition - 1));
+                }
             }
-        }
         }
         return board;
     }

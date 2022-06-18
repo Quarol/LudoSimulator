@@ -12,7 +12,7 @@ public class TakeOutPawnAction implements Action {
         }
         boolean possible = board.getPlayerPawns(player).getBasePawns().size() != 0;
         for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
-            if (pawn.getPosition() == player.getStartPosition()) {
+            if (pawn.getPosition() == player.startPosition()) {
                 return false;
             }
         }
@@ -22,11 +22,11 @@ public class TakeOutPawnAction implements Action {
     public Board execute(Board board, Player player, int roll) {
         if (isPossible(board, player, roll)) {
             board.getPlayerPawns(player).removeBasePawn();
-            board.getPlayerPawns(player).addActivePawn(new Pawn(player.getStartPosition()));
+            board.getPlayerPawns(player).addActivePawn(new Pawn(player.startPosition()));
             for (Player currentPlayer : board.getActivePlayers()) {
-                if (currentPlayer.getId() != player.getId()) {
+                if (currentPlayer.id() != player.id()) {
                     for (Pawn pawn : board.getPlayerPawns(currentPlayer).getActivePawns()) {
-                        if (player.getStartPosition() == pawn.getPosition()) {
+                        if (player.startPosition() == pawn.getPosition()) {
                             board.getPlayerPawns(currentPlayer).removeActivePawn(pawn);
                             board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());
                             break;
