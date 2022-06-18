@@ -5,6 +5,7 @@ import pl.pwr.ludoSimulator.logic.actions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Simulation {
     private final Board board;
@@ -37,12 +38,9 @@ public class Simulation {
     }
 
     private List<Action> findPossibleActions(Board board, Player player, int roll) {
-        List<Action> possibleActions = new ArrayList<>();
-        for (Action action : actions) {
-            if (action.isPossible(board, player, roll))
-                possibleActions.add(action);
-        }
-        return possibleActions;
+        return actions.stream()
+                .filter(action -> action.isPossible(board, player, roll))
+                .collect(Collectors.toList());
     }
     private void executeRandomAction(Board board, Player player, int roll) {
         List<Action> possibleActions = findPossibleActions(board, player, roll);
