@@ -23,7 +23,7 @@ public class Simulation {
     private final List<Action> actions;
 
     public void start() {
-        while (board.getActivePlayers().size() > 1) {
+        while (board.hasAnyActivePlayer()) {
             for (Player player : board.getActivePlayers()) {
                 int roll;
                 do {
