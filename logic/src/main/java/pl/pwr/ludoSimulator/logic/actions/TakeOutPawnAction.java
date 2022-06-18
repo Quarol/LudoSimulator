@@ -10,10 +10,7 @@ import java.util.Optional;
 public class TakeOutPawnAction implements Action {
     @Override
     public boolean isPossible(Board board, Player player, int roll) {
-        if (roll != 6) {
-            return false;
-        }
-        if (board.getPlayerPawns(player).getActivePawns().stream().anyMatch(pawn -> pawn.getPosition() == player.startPosition())) {
+        if (roll != 6 || board.getPlayerPawns(player).getActivePawns().stream().anyMatch(pawn -> pawn.getPosition() == player.startPosition())) {
             return false;
         }
         return board.getPlayerPawns(player).getBasePawns().size() != 0;
