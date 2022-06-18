@@ -26,7 +26,7 @@ public class TakeOutPawnAction implements Action {
             board.getPlayerPawns(player).addActivePawn(new Pawn(player.startPosition()));
             List<Player> otherPlayers = board.getPlayers().stream().filter(p -> !p.equals(player)).toList();
             for (Player currentPlayer : otherPlayers) {
-                Optional<Pawn> otherPawn = board.getPlayerPawns(currentPlayer).getActivePawns().stream().filter(pawn -> player.startPosition() == pawn.getPosition()).findFirst()   ;
+                Optional<Pawn> otherPawn = board.getPlayerPawns(currentPlayer).getActivePawns().stream().filter(pawn -> player.startPosition() == pawn.getPosition()).findFirst();
                 if (otherPawn.isPresent()) {
                     board.getPlayerPawns(currentPlayer).removeActivePawn(otherPawn.get());
                     board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());
