@@ -10,13 +10,10 @@ public class TakeOutPawnAction implements Action {
         if (roll != 6) {
             return false;
         }
-        boolean possible = board.getPlayerPawns(player).getBasePawns().size() != 0;
-        for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
-            if (pawn.getPosition() == player.startPosition()) {
-                return false;
-            }
+        if (board.getPlayerPawns(player).getActivePawns().stream().anyMatch(pawn -> pawn.getPosition() == player.startPosition())) {
+            return false;
         }
-        return possible;
+        return board.getPlayerPawns(player).getBasePawns().size() != 0;
     }
     @Override
     public Board execute(Board board, Player player, int roll) {
