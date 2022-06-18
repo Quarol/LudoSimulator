@@ -4,6 +4,7 @@ import pl.pwr.ludoSimulator.logic.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class KillPawnAction implements Action {
     private List<Integer> getPositionsOccupiedByAnotherPlayers(Board board, Player actionPerformer) {
@@ -42,13 +43,12 @@ public class KillPawnAction implements Action {
             Pawn pawn = pawns.get(0);
             if (pawn.getPosition() + roll < endPosition || pawn.getPosition() > endPosition) {
                 int position = (pawn.getPosition() + roll) % 40;
-                for (Player currentPlayer : board.getActivePlayers()) {
-                    for (Pawn p : board.getPlayerPawns(currentPlayer).getActivePawns()) {
-                        if (p.getPosition() == position) {
-                            board.getPlayerPawns(currentPlayer).removeActivePawn(p);
-                            board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());
-                            break;
-                        }
+                List<Player> otherPlayers = board.getPlayers().stream().filter(p -> !p.equals(player)).toList();
+                for (Player currentPlayer : otherPlayers) {
+                    Optional<Pawn> otherPawn = board.getPlayerPawns(currentPlayer).getActivePawns().stream().filter(p -> p.getPosition() == position).findFirst();
+                    if (otherPawn.isPresent()) {
+                        board.getPlayerPawns(currentPlayer).removeActivePawn(otherPawn.get());
+                        board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());
                     }
                 }
                 pawn.setPosition((pawn.getPosition() + roll) % 40);
