@@ -20,7 +20,7 @@ public class BoardInitializer {
     private List<Player> createRandomPlayers() {
         List<Player> players = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            players.add(new PlayerInitializer().initialize());
+            players.add(new PlayerInitializer().initialize(i));
         }
         return players;
     }
