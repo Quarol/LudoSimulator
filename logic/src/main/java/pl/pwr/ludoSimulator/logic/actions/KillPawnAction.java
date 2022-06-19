@@ -5,15 +5,14 @@ import pl.pwr.ludoSimulator.logic.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class KillPawnAction implements Action {
     private List<Integer> getPositionsOccupiedByAnotherPlayers(Board board, Player actionPerformer) {
         List<Integer> otherPlayersUsedPositions = new ArrayList<>();
         List<Player> otherPlayers = board.getPlayers().stream().filter(p -> !p.equals(actionPerformer)).toList();
         for (Player player : otherPlayers) {
-            for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
-                otherPlayersUsedPositions.add(pawn.getPosition());
-            }
+            otherPlayersUsedPositions.addAll(board.getPlayerPawns(player).getActivePawns().stream().flatMap(p -> Stream.of(p.getPosition())).toList());
         }
         return otherPlayersUsedPositions;
     }

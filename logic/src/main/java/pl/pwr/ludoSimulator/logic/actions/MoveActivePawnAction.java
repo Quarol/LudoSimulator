@@ -13,18 +13,18 @@ public class MoveActivePawnAction implements Action {
     private List<Pawn> getPawns(Board board, Player player, int roll) {
         List<Integer> usedEndPositions = getUsedEndPositions(board, player);
         List<Integer> usedPositions = getUsedActivePositions(board, player);
+        List<Pawn> possiblePawns = board.getPlayerPawns(player).getActivePawns().stream().filter(pawn -> !usedPositions.contains((pawn.getPosition() + roll) % 40)).toList();
         List<Pawn> activePawnsWhichCanMove = new ArrayList<>();
-        for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
-            if (!usedPositions.contains((pawn.getPosition() + roll) % 40)) {
-                if (pawn.getPosition() + roll < player.endPosition()) {
-                    activePawnsWhichCanMove.add(pawn);
-                } else if (pawn.getPosition() > player.endPosition()) {
-                    activePawnsWhichCanMove.add(pawn);
-                } else if (pawn.getPosition() < player.endPosition() && pawn.getPosition() + roll > player.endPosition()
-                        && pawn.getPosition() + roll - player.endPosition() < 5
-                        && !usedEndPositions.contains(pawn.getPosition() + roll - player.endPosition() - 1)) {
-                    activePawnsWhichCanMove.add(pawn);
-                }
+        for (Pawn pawn : possiblePawns) {
+            if (pawn.getPosition() + roll < player.endPosition()) {
+                activePawnsWhichCanMove.add(pawn);
+            } else if (pawn.getPosition() > player.endPosition()) {
+                activePawnsWhichCanMove.add(pawn);
+            } else if (pawn.getPosition() < player.endPosition() && pawn.getPosition() + roll > player.endPosition()
+                    && pawn.getPosition() + roll - player.endPosition() < 5
+                    && !usedEndPositions.contains(pawn.getPosition() + roll - player.endPosition() - 1)
+            ) {
+                activePawnsWhichCanMove.add(pawn);
             }
         }
         return activePawnsWhichCanMove;
@@ -33,9 +33,11 @@ public class MoveActivePawnAction implements Action {
     private List<Integer> getUsedEndPositions(Board board, Player player) {
         return board.getPlayerPawns(player).getEndPawns().stream().flatMap(pawn -> Stream.of(pawn.getPosition())).collect(Collectors.toList());
     }
-    private List<Integer> getUsedActivePositions (Board board, Player player) {
+
+    private List<Integer> getUsedActivePositions(Board board, Player player) {
         return board.getPlayerPawns(player).getActivePawns().stream().flatMap(pawn -> Stream.of(pawn.getPosition())).collect(Collectors.toList());
     }
+
     @Override
     public boolean isPossible(Board board, Player player, int roll) {
         return getPawns(board, player, roll).size() != 0;
