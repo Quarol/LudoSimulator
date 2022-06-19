@@ -19,8 +19,8 @@ public class ActivePositions {
     private void generatePositions(DisplayPosition player1, DisplayPosition player2) {
         int x = player1.x();
         int y = player1.y();
+        positions.add(new DisplayPosition(x, y));
         if (x < player2.x() && y > player2.y()) {
-            positions.add(new DisplayPosition(x, y));
             positions.add(new DisplayPosition(x+1*X_SEPARATOR, y));
             positions.add(new DisplayPosition(x+2*X_SEPARATOR, y));
             positions.add(new DisplayPosition(x+3*X_SEPARATOR, y));
@@ -32,7 +32,6 @@ public class ActivePositions {
             positions.add(new DisplayPosition(x+5*X_SEPARATOR, y-4*Y_SEPARATOR));
         }
         if (x < player2.x() && y < player2.y()) {
-            positions.add(new DisplayPosition(x, y));
             positions.add(new DisplayPosition(x, y+1*Y_SEPARATOR));
             positions.add(new DisplayPosition(x, y+2*Y_SEPARATOR));
             positions.add(new DisplayPosition(x, y+3*Y_SEPARATOR));
@@ -44,7 +43,6 @@ public class ActivePositions {
             positions.add(new DisplayPosition(x+4*X_SEPARATOR, y+5*Y_SEPARATOR));
         }
         if (x > player2.x() && y < player2.y()) {
-            positions.add(new DisplayPosition(x, y));
             positions.add(new DisplayPosition(x-1*X_SEPARATOR, y));
             positions.add(new DisplayPosition(x-2*X_SEPARATOR, y));
             positions.add(new DisplayPosition(x-3*X_SEPARATOR, y));
@@ -56,7 +54,6 @@ public class ActivePositions {
             positions.add(new DisplayPosition(x-5*X_SEPARATOR, y+4*Y_SEPARATOR));
         }
         if (x > player2.x() && y > player2.y()) {
-            positions.add(new DisplayPosition(x, y));
             positions.add(new DisplayPosition(x, y-1*Y_SEPARATOR));
             positions.add(new DisplayPosition(x, y-2*Y_SEPARATOR));
             positions.add(new DisplayPosition(x, y-3*Y_SEPARATOR));
