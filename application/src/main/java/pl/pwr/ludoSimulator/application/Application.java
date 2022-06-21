@@ -6,12 +6,16 @@ import pl.pwr.ludoSimulator.logic.*;
 import pl.pwr.ludoSimulator.display.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) throws Exception {
         int nrOfPLayers = getNumberOdPlayers();
+
+        /*AllActions[] allActions = AllActions.values();
+        List<Action> actions = */
 
         List<Action> actions = new ArrayList<>();
         actions.add(new TakeOutPawnAction());
