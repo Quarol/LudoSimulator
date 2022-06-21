@@ -42,8 +42,8 @@ public class Simulation {
     }
     private void executeRandomAction(Board board, Player player, int roll) {
         List<Action> possibleActions = findPossibleActions(board, player, roll);
-        boolean thereAreAnyActions = (possibleActions.size() != 0);
-        if (thereAreAnyActions) {
+        boolean areThereAnyActions = (possibleActions.size() != 0);
+        if (areThereAnyActions) {
             int actionToExecute = random(possibleActions.size());
             possibleActions.get(actionToExecute).execute(board, player, roll);
         }
