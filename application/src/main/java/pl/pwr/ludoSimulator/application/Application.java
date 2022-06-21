@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) throws Exception {
-        int nrOfPLayers = getNumberOdPlayers();
+        int nrOfPLayers = getNumberOfPlayers();
 
         /*AllActions[] allActions = AllActions.values();
         List<Action> actions = */
@@ -28,7 +28,7 @@ public class Application {
         simulation.start();
     }
 
-    private static int getNumberOdPlayers() throws Exception {
+    private static int getNumberOfPlayers() throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wpisz dane do symulacji");
         System.out.print("Liczba graczy: ");
