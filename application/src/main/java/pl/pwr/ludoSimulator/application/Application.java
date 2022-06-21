@@ -11,16 +11,7 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) throws Exception {
-
-        // do przeprojektowania i wydzielenia do osobnej klasy
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Wpisz dane do symulacji");
-        System.out.print("Liczba graczy: ");
-        int nrOfPLayers = scanner.nextInt();
-        System.out.println("\n");
-        if (nrOfPLayers > 4 || nrOfPLayers < 2) {
-            throw new Exception("Wprowadź liczbę graczy w przedziale 2-4");
-        }
+        int nrOfPLayers = getNumberOdPlayers();
 
         List<Action> actions = new ArrayList<>();
         actions.add(new TakeOutPawnAction());
@@ -31,5 +22,18 @@ public class Application {
         Display display = new Display(board);
         Simulation simulation = new Simulation(board, actions, new Callback(display));
         simulation.start();
+    }
+
+    private static int getNumberOdPlayers() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wpisz dane do symulacji");
+        System.out.print("Liczba graczy: ");
+        int nrOfPLayers = scanner.nextInt();
+        System.out.println("\n");
+        if (nrOfPLayers > 4 || nrOfPLayers < 2) {
+            throw new Exception("Wprowadź liczbę graczy w przedziale 2-4");
+        }
+
+        return nrOfPLayers;
     }
 }
