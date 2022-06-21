@@ -6,7 +6,6 @@ import pl.pwr.ludoSimulator.logic.*;
 import pl.pwr.ludoSimulator.display.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
