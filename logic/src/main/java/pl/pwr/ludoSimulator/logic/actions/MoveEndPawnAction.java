@@ -14,9 +14,13 @@ public class MoveEndPawnAction implements Action {
     }
 
     private List<Pawn> getPawns(Board board, Player player, int roll) {
-        List<Integer> usedPositions = board.getPlayerPawns(player).getEndPawns().stream().flatMap(pawn -> Stream.of(pawn.getPosition())).toList();
+        List<Integer> usedPositions = board.getPlayerPawns(player).getEndPawns().stream()
+                .flatMap(pawn -> Stream.of(pawn.getPosition()))
+                .toList();
         return board.getPlayerPawns(player).getEndPawns().stream()
-                .filter(pawn -> (pawn.getPosition() + roll < 4 && !usedPositions.contains(pawn.getPosition() + roll))).toList();
+                .filter(pawn -> pawn.getPosition() + roll < 4)
+                .filter(pawn -> !usedPositions.contains(pawn.getPosition() + roll))
+                .toList();
     }
 
     @Override

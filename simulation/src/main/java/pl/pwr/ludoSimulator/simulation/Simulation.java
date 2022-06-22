@@ -26,8 +26,10 @@ public class Simulation {
                 int roll;
                 do {
                     roll = Dice.roll();
-                    executeRandomAction(board, player, roll);
-                    simulationCallback.callbackAfterMove();
+                    if (board.hasAnyActivePlayer()) {
+                        executeRandomAction(board, player, roll);
+                        simulationCallback.callbackAfterMove();
+                    }
                 } while (roll == 6);
             }
             simulationCallback.callbackAfterRound();

@@ -1,5 +1,2 @@
-- Sprawienie, by symulacja się skończyła *ZAWSZE* kiedy przedostatni gracz zakończy grę
-- Poprawa stylizacji kodu (entery przy kropkach
-- Try catch w Application
 - Poprawa enum AllActions
 - LudoSimulator na ludo.simulator

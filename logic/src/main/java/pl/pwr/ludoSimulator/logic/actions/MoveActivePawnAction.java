@@ -13,7 +13,9 @@ public class MoveActivePawnAction implements Action {
     private List<Pawn> getPawns(Board board, Player player, int roll) {
         List<Integer> usedEndPositions = getUsedEndPositions(board, player);
         List<Integer> usedPositions = getUsedActivePositions(board, player);
-        List<Pawn> possiblePawns = board.getPlayerPawns(player).getActivePawns().stream().filter(pawn -> !usedPositions.contains((pawn.getPosition() + roll) % 40)).toList();
+        List<Pawn> possiblePawns = board.getPlayerPawns(player).getActivePawns().stream()
+                .filter(pawn -> !usedPositions.contains((pawn.getPosition() + roll) % 40))
+                .toList();
         List<Pawn> activePawnsWhichCanMove = new ArrayList<>();
         for (Pawn pawn : possiblePawns) {
             if (pawn.getPosition() + roll < player.endPosition()) {
@@ -31,11 +33,15 @@ public class MoveActivePawnAction implements Action {
     }
 
     private List<Integer> getUsedEndPositions(Board board, Player player) {
-        return board.getPlayerPawns(player).getEndPawns().stream().flatMap(pawn -> Stream.of(pawn.getPosition())).collect(Collectors.toList());
+        return board.getPlayerPawns(player).getEndPawns().stream()
+                .flatMap(pawn -> Stream.of(pawn.getPosition()))
+                .collect(Collectors.toList());
     }
 
     private List<Integer> getUsedActivePositions(Board board, Player player) {
-        return board.getPlayerPawns(player).getActivePawns().stream().flatMap(pawn -> Stream.of(pawn.getPosition())).collect(Collectors.toList());
+        return board.getPlayerPawns(player).getActivePawns().stream()
+                .flatMap(pawn -> Stream.of(pawn.getPosition()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -53,9 +59,12 @@ public class MoveActivePawnAction implements Action {
             if (pawn.getPosition() + roll < endPosition || pawn.getPosition() > endPosition) {
                 pawn.setPosition((pawn.getPosition() + roll) % 40);
             } else if (pawn.getPosition() < endPosition && pawn.getPosition() + roll > endPosition) {
-                if (pawn.getPosition() + roll - endPosition < 5 && !usedEndPositions.contains(pawn.getPosition() + roll - endPosition - 1)) {
+                if (pawn.getPosition() + roll - endPosition < 5
+                        && !usedEndPositions.contains(pawn.getPosition() + roll - endPosition - 1)) {
                     board.getPlayerPawns(player).removeActivePawn(pawn);
-                    board.getPlayerPawns(player).addEndPawn(new Pawn(pawn.getPosition() + roll - endPosition - 1));
+                    board.getPlayerPawns(player).addEndPawn(
+                            new Pawn(pawn.getPosition() + roll - endPosition - 1)
+                    );
                 }
             }
         }

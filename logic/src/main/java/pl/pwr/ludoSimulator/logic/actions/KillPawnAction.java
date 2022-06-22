@@ -10,9 +10,13 @@ import java.util.stream.Stream;
 public class KillPawnAction implements Action {
     private List<Integer> getPositionsOccupiedByAnotherPlayers(Board board, Player actionPerformer) {
         List<Integer> otherPlayersUsedPositions = new ArrayList<>();
-        List<Player> otherPlayers = board.getPlayers().stream().filter(p -> !p.equals(actionPerformer)).toList();
+        List<Player> otherPlayers = board.getPlayers().stream()
+                .filter(p -> !p.equals(actionPerformer))
+                .toList();
         for (Player player : otherPlayers) {
-            otherPlayersUsedPositions.addAll(board.getPlayerPawns(player).getActivePawns().stream().flatMap(p -> Stream.of(p.getPosition())).toList());
+            otherPlayersUsedPositions
+                    .addAll(board.getPlayerPawns(player).getActivePawns().stream()
+                            .flatMap(p -> Stream.of(p.getPosition())).toList());
         }
         return otherPlayersUsedPositions;
     }
@@ -42,9 +46,13 @@ public class KillPawnAction implements Action {
             Pawn pawn = pawns.get(0);
             if (pawn.getPosition() + roll < endPosition || pawn.getPosition() > endPosition) {
                 int position = (pawn.getPosition() + roll) % 40;
-                List<Player> otherPlayers = board.getPlayers().stream().filter(p -> !p.equals(player)).toList();
+                List<Player> otherPlayers = board.getPlayers().stream()
+                        .filter(p -> !p.equals(player))
+                        .toList();
                 for (Player currentPlayer : otherPlayers) {
-                    Optional<Pawn> otherPawn = board.getPlayerPawns(currentPlayer).getActivePawns().stream().filter(p -> p.getPosition() == position).findFirst();
+                    Optional<Pawn> otherPawn = board.getPlayerPawns(currentPlayer).getActivePawns().stream()
+                            .filter(p -> p.getPosition() == position)
+                            .findFirst();
                     if (otherPawn.isPresent()) {
                         board.getPlayerPawns(currentPlayer).removeActivePawn(otherPawn.get());
                         board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());

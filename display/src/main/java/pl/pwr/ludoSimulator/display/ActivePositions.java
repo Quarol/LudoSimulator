@@ -24,7 +24,7 @@ public class ActivePositions {
         int y = player1.y();
         positions.add(new DisplayPosition(x, y));
 
-        List<DisplayPosition> positionsToAdd = new ArrayList<>();
+        List<DisplayPosition> positionsToAdd;
         if (x < player2.x() && y > player2.y()) {
 
             positionsToAdd =  loop(x, MIN_POSITION, MAX_POSITION-1, 1,

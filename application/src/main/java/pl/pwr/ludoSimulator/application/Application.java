@@ -11,8 +11,12 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) throws Exception {
-        int nrOfPLayers = getNumberOfPlayers();
-
+        int nrOfPLayers = 0;
+        try {
+            nrOfPLayers = getNumberOfPlayers();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         /*AllActions[] allActions = AllActions.values();
         List<Action> actions = */
 
@@ -29,12 +33,12 @@ public class Application {
 
     private static int getNumberOfPlayers() throws Exception {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wpisz dane do symulacji");
+        System.out.println("Wprowadź liczbę graczy w przedziale 2-4: \n");
         System.out.print("Liczba graczy: ");
         int nrOfPLayers = scanner.nextInt();
         System.out.println("\n");
         if (nrOfPLayers > 4 || nrOfPLayers < 2) {
-            throw new Exception("Wprowadź liczbę graczy w przedziale 2-4");
+            throw new Exception("Nieprawidłowa liczba graczy");
         }
 
         return nrOfPLayers;
