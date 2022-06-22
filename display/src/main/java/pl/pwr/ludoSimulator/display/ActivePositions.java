@@ -3,6 +3,7 @@ package pl.pwr.ludoSimulator.display;
 import pl.pwr.ludoSimulator.logic.Pawn;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ActivePositions {
@@ -22,61 +23,64 @@ public class ActivePositions {
         int x = player1.x();
         int y = player1.y();
         positions.add(new DisplayPosition(x, y));
+
+        List<DisplayPosition> positionsToAdd = new ArrayList<>();
         if (x < player2.x() && y > player2.y()) {
-            /*positions.add(new DisplayPosition(x+1*X_SEPARATOR, y));
-            positions.add(new DisplayPosition(x+2*X_SEPARATOR, y));
-            positions.add(new DisplayPosition(x+3*X_SEPARATOR, y));
-            positions.add(new DisplayPosition(x+4*X_SEPARATOR, y));*/
 
+            positionsToAdd =  loop(x, MIN_POSITION, MAX_POSITION-1, 1,
+                    y, 0, 0, 0);
+            positions.addAll(positionsToAdd);
 
-            loop(x, MIN_POSITION, MAX_POSITION-1, 1, y, 0, 0, 0);
-            //positions.addAll(loop(x, MIN_POSITION, MAX_POSITION, 1, 0, 0, 0, 0));
+            positionsToAdd = loop(x, MAX_POSITION-1, MAX_POSITION-1, 0,
+                    y, -(MAX_POSITION-1), -MIN_POSITION, 1);
+            DisplayPosition cos = positionsToAdd.get(0);
+            Collections.reverse(positionsToAdd);
+            positions.addAll(positionsToAdd);
 
-            positions.add(new DisplayPosition(x+4*X_SEPARATOR, y-Y_SEPARATOR));
-            positions.add(new DisplayPosition(x+4*X_SEPARATOR, y-2*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x+4*X_SEPARATOR, y-3*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x+4*X_SEPARATOR, y-4*Y_SEPARATOR));
-
-            positions.add(new DisplayPosition(x+5*X_SEPARATOR, y-4*Y_SEPARATOR));
+            positions.add(new DisplayPosition(x + MAX_POSITION*X_SEPARATOR,
+                    y - (MAX_POSITION-1)*Y_SEPARATOR));
         }
         if (x < player2.x() && y < player2.y()) {
-            positions.add(new DisplayPosition(x, y+1*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x, y+2*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x, y+3*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x, y+4*Y_SEPARATOR));
 
-            positions.add(new DisplayPosition(x+1*X_SEPARATOR, y+4*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x+2*X_SEPARATOR, y+4*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x+3*X_SEPARATOR, y+4*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x+4*X_SEPARATOR, y+4*Y_SEPARATOR));
+            positionsToAdd = loop(x, 0, 0, 0,
+                    y, MIN_POSITION, MAX_POSITION-1, 1);
+            positions.addAll(positionsToAdd);
 
-            positions.add(new DisplayPosition(x+4*X_SEPARATOR, y+5*Y_SEPARATOR));
+            positionsToAdd = loop(x, MIN_POSITION, MAX_POSITION-1, 1,
+                    y, MAX_POSITION-1, MAX_POSITION-1, 0);
+            positions.addAll(positionsToAdd);
+
+            positions.add(new DisplayPosition(x + (MAX_POSITION-1)*X_SEPARATOR,
+                    y + MAX_POSITION*Y_SEPARATOR));
         }
         if (x > player2.x() && y < player2.y()) {
-            positions.add(new DisplayPosition(x-1*X_SEPARATOR, y));
-            positions.add(new DisplayPosition(x-2*X_SEPARATOR, y));
-            positions.add(new DisplayPosition(x-3*X_SEPARATOR, y));
-            positions.add(new DisplayPosition(x-4*X_SEPARATOR, y));
 
-            positions.add(new DisplayPosition(x-4*X_SEPARATOR, y+1*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x-4*X_SEPARATOR, y+2*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x-4*X_SEPARATOR, y+3*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x-4*X_SEPARATOR, y+4*Y_SEPARATOR));
+            positionsToAdd = loop(x, -(MAX_POSITION-1), -MIN_POSITION, 1,
+                    y, 0, 0, 0);
+            Collections.reverse(positionsToAdd);
+            positions.addAll(positionsToAdd);
 
-            positions.add(new DisplayPosition(x-5*X_SEPARATOR, y+4*Y_SEPARATOR));
+            positionsToAdd = loop(x, -(MAX_POSITION-1), -(MAX_POSITION-1), 0,
+                    y, MIN_POSITION, MAX_POSITION-1, 1);
+            positions.addAll(positionsToAdd);
+
+            positions.add(new DisplayPosition(x - MAX_POSITION*X_SEPARATOR,
+                    y + (MAX_POSITION-1)*Y_SEPARATOR));
         }
         if (x > player2.x() && y > player2.y()) {
-            positions.add(new DisplayPosition(x, y-1*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x, y-2*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x, y-3*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x, y-4*Y_SEPARATOR));
 
-            positions.add(new DisplayPosition(x-1*X_SEPARATOR, y-4*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x-2*X_SEPARATOR, y-4*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x-3*X_SEPARATOR, y-4*Y_SEPARATOR));
-            positions.add(new DisplayPosition(x-4*X_SEPARATOR, y-4*Y_SEPARATOR));
+            positionsToAdd = loop(x, 0, 0, 0,
+                    y, -(MAX_POSITION-1), -MIN_POSITION, 1);
+            Collections.reverse(positionsToAdd);
+            positions.addAll(positionsToAdd);
 
-            positions.add(new DisplayPosition(x-4*X_SEPARATOR, y-5*Y_SEPARATOR));
+            positionsToAdd = loop(x, -(MAX_POSITION-1), -MIN_POSITION, 1,
+                    y, -(MAX_POSITION-1), -(MAX_POSITION-1), 0);
+            Collections.reverse(positionsToAdd);
+            positions.addAll(positionsToAdd);
+
+            positions.add(new DisplayPosition(x - (MAX_POSITION-1)*X_SEPARATOR,
+                    y - MAX_POSITION*Y_SEPARATOR));
         }
     }
 
@@ -84,8 +88,8 @@ public class ActivePositions {
                                       int y, int minY, int maxY, int yInterval) {
         List<DisplayPosition> displayPositions = new ArrayList<>();
 
-        for (int i = minX, j = minY; i <= maxX || j <= maxY; i += xInterval, j += yInterval)
-            positions.add(new DisplayPosition(x + i*X_SEPARATOR, y + j*Y_SEPARATOR));
+        for (int i = minX, j = minY; i <= maxX && j <= maxY; i += xInterval, j += yInterval)
+            displayPositions.add(new DisplayPosition(x + i*X_SEPARATOR, y + j*Y_SEPARATOR));
 
         return displayPositions;
     }
