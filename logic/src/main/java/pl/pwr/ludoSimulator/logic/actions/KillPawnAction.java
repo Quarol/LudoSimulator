@@ -16,7 +16,8 @@ public class KillPawnAction implements Action {
         for (Player player : otherPlayers) {
             otherPlayersUsedPositions
                     .addAll(board.getPlayerPawns(player).getActivePawns().stream()
-                            .flatMap(p -> Stream.of(p.getPosition())).toList());
+                            .flatMap(p -> Stream.of(p.getPosition()))
+                            .toList());
         }
         return otherPlayersUsedPositions;
     }
