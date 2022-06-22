@@ -2,3 +2,4 @@
 - Poprawa stylizacji kodu (entery przy kropkach
 - Try catch w Application
 - Poprawa enum AllActions
+- LudoSimulator na ludo.simulator
