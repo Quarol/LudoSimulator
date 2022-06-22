@@ -1,2 +1,3 @@
 - Poprawa enum AllActions
 - LudoSimulator na ludo.simulator
+- Dodanie informacji co wyświtla się po zakończonej grze np. Liczba rzutów kostką: n
