@@ -30,6 +30,7 @@ test {
     useJUnitPlatform()
 }
 application {
+<<<<<<< HEAD
     mainClass = 'pl.pwr.ludoSimulator.application.Application'
 }
 
@@ -43,3 +44,7 @@ jar {
         attributes 'Main-Class': 'pl.pwr.ludo.simulator.application.Application'
     }
 }
+=======
+    mainClass = 'pl.pwr.ludo.simulator.application.Application'
+}
+>>>>>>> 69cdd820c5323c43aab81e2dfe98735c829551e1
