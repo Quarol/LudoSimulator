@@ -25,13 +25,6 @@ public class Display {
 
     public Display(Board board) {
         this.board = board;
-        for (int i = 0; i < 22; i++) {
-            this.displayTable.add(new ArrayList<>());
-            for (int j = 0; j < 11; j++) {
-                this.displayTable.get(i).add(' ');
-                this.displayTable.get(i).set(j, ' ');
-            }
-        }
     }
 
     private void renderNewDisplay() {
