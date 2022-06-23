@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 import pl.pwr.ludo.simulator.logic.Board;
 import pl.pwr.ludo.simulator.logic.Pawn;
 import pl.pwr.ludo.simulator.logic.Player;
-import pl.pwr.ludo.simulator.logic.PlayerPawns;
 
 public class MoveEndPawnAction implements Action {
     @Override
