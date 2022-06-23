@@ -27,7 +27,7 @@ public class EndPositions {
 
         x = MID_X;
         y = MIN_Y;
-        for (int j = y; j <= 4; ++j) {
+        for (int j = y; j <= 4; j++) {
             positions.add(new DisplayPosition(x, j));
         }
 
@@ -39,7 +39,7 @@ public class EndPositions {
 
         x = MID_X;
         y = MAX_Y;
-        for (int j = y; j >= 6; --j) {
+        for (int j = y; j >= 6; j--) {
             positions.add(new DisplayPosition(x, j));
         }
     }
