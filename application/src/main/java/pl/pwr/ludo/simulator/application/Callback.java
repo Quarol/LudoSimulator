@@ -10,18 +10,20 @@ public class Callback implements SimulationCallback {
         this.display = display;
     }
 
-    private int counter = 0;
+    private int numberOfDiceRolls = 0;
+    private int numberOfRounds = 0;
 
     public void callbackAfterMove() {
-        counter++;
+        numberOfDiceRolls++;
         display.display();
     }
 
     public void callbackAfterRound() {
-
+        numberOfRounds++;
     }
 
     public void callbackAfterEnd() {
-        System.out.println(counter);
+        System.out.println("Laczna liczba rzutow kosta: " + numberOfDiceRolls);
+        System.out.println("Laczna liczba rund w grze: " + numberOfRounds);
     }
 }
