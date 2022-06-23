@@ -49,7 +49,7 @@ public class EndPositions {
     }
 
     public DisplayPosition getPosition(Player player, Pawn pawn) {
-        int playerId = player.id();
+        int playerId = player.getId();
         return positions.get(playerId * 4 + pawn.getPosition());
     }
 }

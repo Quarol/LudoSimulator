@@ -52,15 +52,15 @@ public class Display {
         this.renderNewDisplay();
 
         for (Player player : board.getPlayers()) {
-            PlayerPawns playerPawns = board.getPlayerPawns(player);
+            PlayerPawns playerPawns = player.getPawns();
             for (int i = 0; i < playerPawns.getBasePawns().size(); i++) {
-                setDisplayTableField(basePositions.getPosition(player.id() + 1, i), player.id() + 1);
+                setDisplayTableField(basePositions.getPosition(player.getId() + 1, i), player.getId() + 1);
             }
             for (Pawn pawn : playerPawns.getEndPawns()) {
-                setDisplayTableField(endPositions.getPosition(player, pawn), player.id() + 1);
+                setDisplayTableField(endPositions.getPosition(player, pawn), player.getId() + 1);
             }
             for (Pawn pawn : playerPawns.getActivePawns()) {
-                setDisplayTableField(activePositions.get(pawn), player.id() + 1);
+                setDisplayTableField(activePositions.get(pawn), player.getId() + 1);
             }
         }
     }

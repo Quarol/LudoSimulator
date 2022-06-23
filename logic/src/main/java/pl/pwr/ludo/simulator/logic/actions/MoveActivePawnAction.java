@@ -13,18 +13,18 @@ public class MoveActivePawnAction implements Action {
     private List<Pawn> getPawns(Board board, Player player, int roll) {
         List<Integer> usedEndPositions = getUsedEndPositions(board, player);
         List<Integer> usedPositions = getUsedActivePositions(board, player);
-        List<Pawn> possiblePawns = board.getPlayerPawns(player).getActivePawns().stream()
+        List<Pawn> possiblePawns = player.getPawns().getActivePawns().stream()
                 .filter(pawn -> !usedPositions.contains((pawn.getPosition() + roll) % 40))
                 .toList();
         List<Pawn> activePawnsWhichCanMove = new ArrayList<>();
         for (Pawn pawn : possiblePawns) {
-            if (pawn.getPosition() + roll < player.endPosition()) {
+            if (pawn.getPosition() + roll < player.getEndPosition()) {
                 activePawnsWhichCanMove.add(pawn);
-            } else if (pawn.getPosition() > player.endPosition()) {
+            } else if (pawn.getPosition() > player.getEndPosition()) {
                 activePawnsWhichCanMove.add(pawn);
-            } else if (pawn.getPosition() < player.endPosition() && pawn.getPosition() + roll > player.endPosition()
-                    && pawn.getPosition() + roll - player.endPosition() < 5
-                    && !usedEndPositions.contains(pawn.getPosition() + roll - player.endPosition() - 1)
+            } else if (pawn.getPosition() < player.getEndPosition() && pawn.getPosition() + roll > player.getEndPosition()
+                    && pawn.getPosition() + roll - player.getEndPosition() < 5
+                    && !usedEndPositions.contains(pawn.getPosition() + roll - player.getEndPosition() - 1)
             ) {
                 activePawnsWhichCanMove.add(pawn);
             }
@@ -33,13 +33,13 @@ public class MoveActivePawnAction implements Action {
     }
 
     private List<Integer> getUsedEndPositions(Board board, Player player) {
-        return board.getPlayerPawns(player).getEndPawns().stream()
+        return player.getPawns().getEndPawns().stream()
                 .flatMap(pawn -> Stream.of(pawn.getPosition()))
                 .collect(Collectors.toList());
     }
 
     private List<Integer> getUsedActivePositions(Board board, Player player) {
-        return board.getPlayerPawns(player).getActivePawns().stream()
+        return player.getPawns().getActivePawns().stream()
                 .flatMap(pawn -> Stream.of(pawn.getPosition()))
                 .collect(Collectors.toList());
     }
@@ -51,19 +51,19 @@ public class MoveActivePawnAction implements Action {
 
     @Override
     public Board execute(Board board, Player player, int roll) {
-        int endPosition = player.endPosition();
+        int getEndPosition = player.getEndPosition();
         List<Integer> usedEndPositions = getUsedEndPositions(board, player);
         List<Pawn> pawns = getPawns(board, player, roll);
         if (pawns.size() != 0) {
             Pawn pawn = pawns.get(0);
-            if (pawn.getPosition() + roll < endPosition || pawn.getPosition() > endPosition) {
+            if (pawn.getPosition() + roll < getEndPosition || pawn.getPosition() > getEndPosition) {
                 pawn.setPosition((pawn.getPosition() + roll) % 40);
-            } else if (pawn.getPosition() < endPosition && pawn.getPosition() + roll > endPosition) {
-                if (pawn.getPosition() + roll - endPosition < 5
-                        && !usedEndPositions.contains(pawn.getPosition() + roll - endPosition - 1)) {
-                    board.getPlayerPawns(player).removeActivePawn(pawn);
-                    board.getPlayerPawns(player).addEndPawn(
-                            new Pawn(pawn.getPosition() + roll - endPosition - 1)
+            } else if (pawn.getPosition() < getEndPosition && pawn.getPosition() + roll > getEndPosition) {
+                if (pawn.getPosition() + roll - getEndPosition < 5
+                        && !usedEndPositions.contains(pawn.getPosition() + roll - getEndPosition - 1)) {
+                    player.getPawns().removeActivePawn(pawn);
+                    player.getPawns().addEndPawn(
+                            new Pawn(pawn.getPosition() + roll - getEndPosition - 1)
                     );
                 }
             }

@@ -15,7 +15,7 @@ public class KillPawnAction implements Action {
                 .toList();
         for (Player player : otherPlayers) {
             otherPlayersUsedPositions
-                    .addAll(board.getPlayerPawns(player).getActivePawns().stream()
+                    .addAll(player.getPawns().getActivePawns().stream()
                             .flatMap(p -> Stream.of(p.getPosition()))
                             .toList());
         }
@@ -23,9 +23,9 @@ public class KillPawnAction implements Action {
     }
 
     private List<Pawn> findPawnsWhichCanKill(Board board, Player actionPerformer, int roll, List<Integer> positionsOccupiedByAnotherPlayers) {
-        return board.getPlayerPawns(actionPerformer).getActivePawns().stream()
+        return actionPerformer.getPawns().getActivePawns().stream()
                 .filter(pawn -> positionsOccupiedByAnotherPlayers.contains((pawn.getPosition() + roll) % 40))
-                .filter(pawn -> (pawn.getPosition() + roll < actionPerformer.endPosition() || pawn.getPosition() > actionPerformer.endPosition()))
+                .filter(pawn -> (pawn.getPosition() + roll < actionPerformer.getEndPosition() || pawn.getPosition() > actionPerformer.getEndPosition()))
                 .toList();
     }
 
@@ -41,7 +41,7 @@ public class KillPawnAction implements Action {
 
     @Override
     public Board execute(Board board, Player player, int roll) {
-        int endPosition = player.endPosition();
+        int endPosition = player.getEndPosition();
         List<Pawn> pawns = getPawns(board, player, roll);
         if (pawns.size() != 0) {
             Pawn pawn = pawns.get(0);
@@ -51,7 +51,7 @@ public class KillPawnAction implements Action {
                         .filter(p -> !p.equals(player))
                         .toList();
                 for (Player currentPlayer : otherPlayers) {
-                    PlayerPawns currentPlayersPawns = board.getPlayerPawns(currentPlayer);
+                    PlayerPawns currentPlayersPawns = currentPlayer.getPawns();
                     Optional<Pawn> otherPawn = currentPlayersPawns.getActivePawns().stream()
                             .filter(p -> p.getPosition() == position)
                             .findFirst();
