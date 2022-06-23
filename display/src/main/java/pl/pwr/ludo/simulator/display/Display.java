@@ -6,6 +6,7 @@ import java.util.List;
 import pl.pwr.ludo.simulator.logic.Board;
 import pl.pwr.ludo.simulator.logic.Pawn;
 import pl.pwr.ludo.simulator.logic.Player;
+import pl.pwr.ludo.simulator.logic.PlayerPawns;
 
 public class Display {
     private final List<List<Character>> displayTable = new ArrayList<>();
@@ -49,14 +50,16 @@ public class Display {
 
     private void renderDisplay() {
         this.renderNewDisplay();
+
         for (Player player : board.getPlayers()) {
-            for (int i = 0; i < board.getPlayerPawns(player).getBasePawns().size(); i++) {
+            PlayerPawns playerPawns = board.getPlayerPawns(player);
+            for (int i = 0; i < playerPawns.getBasePawns().size(); i++) {
                 setDisplayTableField(basePositions.getPosition(player.id() + 1, i), player.id() + 1);
             }
-            for (Pawn pawn : board.getPlayerPawns(player).getEndPawns()) {
+            for (Pawn pawn : playerPawns.getEndPawns()) {
                 setDisplayTableField(endPositions.getPosition(player, pawn), player.id() + 1);
             }
-            for (Pawn pawn : board.getPlayerPawns(player).getActivePawns()) {
+            for (Pawn pawn : playerPawns.getActivePawns()) {
                 setDisplayTableField(activePositions.get(pawn), player.id() + 1);
             }
         }

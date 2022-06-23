@@ -51,12 +51,13 @@ public class KillPawnAction implements Action {
                         .filter(p -> !p.equals(player))
                         .toList();
                 for (Player currentPlayer : otherPlayers) {
-                    Optional<Pawn> otherPawn = board.getPlayerPawns(currentPlayer).getActivePawns().stream()
+                    PlayerPawns currentPlayersPawns = board.getPlayerPawns(currentPlayer);
+                    Optional<Pawn> otherPawn = currentPlayersPawns.getActivePawns().stream()
                             .filter(p -> p.getPosition() == position)
                             .findFirst();
                     if (otherPawn.isPresent()) {
-                        board.getPlayerPawns(currentPlayer).removeActivePawn(otherPawn.get());
-                        board.getPlayerPawns(currentPlayer).addBasePawn(new Pawn());
+                        currentPlayersPawns.removeActivePawn(otherPawn.get());
+                        currentPlayersPawns.addBasePawn(new Pawn());
                     }
                 }
                 pawn.setPosition((pawn.getPosition() + roll) % 40);
