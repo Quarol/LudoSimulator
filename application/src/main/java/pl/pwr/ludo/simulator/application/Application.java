@@ -12,12 +12,7 @@ import java.util.stream.Stream;
 
 public class Application {
     public static void main(String[] args)  {
-        int nrOfPLayers = 0;
-        try {
-            nrOfPLayers = getNumberOfPlayers();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        int nrOfPLayers = getNumberOfPlayers();
 
         List<Action> actions = Arrays.stream(Actions.values())
                 .flatMap(action -> Stream.of(action.get()))
@@ -28,16 +23,18 @@ public class Application {
         simulation.start();
     }
 
-    private static int getNumberOfPlayers() throws Exception {
+    private static int getNumberOfPlayers() {
+        int nrOfPlayers = -1;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wprowadz liczbe graczy w przedziale 2-4: \n");
-        System.out.print("Liczba graczy: ");
-        int nrOfPLayers = scanner.nextInt();
-        scanner.close();
-        System.out.println("\n");
-        if (nrOfPLayers > 4 || nrOfPLayers < 2) {
-            throw new Exception("Nieprawidlowa liczba graczy");
+        while (nrOfPlayers > 4 || nrOfPlayers < 2) {
+            System.out.println("Wprowadz liczbe graczy w przedziale 2-4:");
+            System.out.print("Liczba graczy: ");
+            nrOfPlayers = scanner.nextInt();
+            if (nrOfPlayers > 4 || nrOfPlayers < 2) {
+                System.out.println("Nieprawidlowa liczba graczy");
+            }
         }
-        return nrOfPLayers;
+        scanner.close();
+        return nrOfPlayers;
     }
 }
