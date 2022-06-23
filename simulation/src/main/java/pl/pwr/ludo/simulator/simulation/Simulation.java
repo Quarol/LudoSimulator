@@ -23,14 +23,14 @@ public class Simulation {
     public void start() {
         while (board.hasAnyActivePlayer()) {
             for (Player player : board.getActivePlayers()) {
-                int roll;
+                int diceRoll;
                 do {
-                    roll = Dice.roll();
+                    diceRoll = Dice.roll();
                     if (board.hasAnyActivePlayer()) {
-                        executeRandomAction(board, player, roll);
+                        executeRandomAction(board, player, diceRoll);
                         simulationCallback.callbackAfterMove();
                     }
-                } while (roll == 6);
+                } while (diceRoll == 6);
             }
             simulationCallback.callbackAfterRound();
         }
@@ -42,12 +42,12 @@ public class Simulation {
                 .filter(action -> action.isPossible(board, player, roll))
                 .collect(Collectors.toList());
     }
-    private void executeRandomAction(Board board, Player player, int roll) {
-        List<Action> possibleActions = findPossibleActions(board, player, roll);
+    private void executeRandomAction(Board board, Player player, int diceRoll) {
+        List<Action> possibleActions = findPossibleActions(board, player, diceRoll);
         boolean areThereAnyActions = (possibleActions.size() != 0);
         if (areThereAnyActions) {
             int actionToExecute = random(possibleActions.size());
-            possibleActions.get(actionToExecute).execute(board, player, roll);
+            possibleActions.get(actionToExecute).execute(board, player, diceRoll);
         }
     }
 }

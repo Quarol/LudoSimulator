@@ -1,3 +1,0 @@
-- Poprawa enum AllActions
-- Dodanie informacji co wyświetla się po zakończonej grze np. Liczba rzutów kostką: n
-- nowa klasa: PlayerHelper
