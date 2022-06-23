@@ -5,9 +5,10 @@ import pl.pwr.ludo.simulator.logic.*;
 import pl.pwr.ludo.simulator.logic.actions.*;
 import pl.pwr.ludo.simulator.simulation.*;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Application {
     public static void main(String[] args)  {
@@ -17,14 +18,10 @@ public class Application {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        /*AllActions[] allActions = AllActions.values();
-        List<Action> actions = */
 
-        List<Action> actions = new ArrayList<>();
-        actions.add(new TakeOutPawnAction());
-        actions.add(new MoveActivePawnAction());
-        actions.add(new MoveEndPawnAction());
-        actions.add(new KillPawnAction());
+        List<Action> actions = Arrays.stream(Actions.values())
+                .flatMap(action -> Stream.of(action.get()))
+                .toList();
         Board board = new BoardInitializer(nrOfPLayers).initialize();
         Display display = new Display(board);
         Simulation simulation = new Simulation(board, actions, new Callback(display));
@@ -33,13 +30,13 @@ public class Application {
 
     private static int getNumberOfPlayers() throws Exception {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wprowadź liczbę graczy w przedziale 2-4: \n");
+        System.out.println("Wprowadz liczbe graczy w przedziale 2-4: \n");
         System.out.print("Liczba graczy: ");
         int nrOfPLayers = scanner.nextInt();
         scanner.close();
         System.out.println("\n");
         if (nrOfPLayers > 4 || nrOfPLayers < 2) {
-            throw new Exception("Nieprawidłowa liczba graczy");
+            throw new Exception("Nieprawidlowa liczba graczy");
         }
         return nrOfPLayers;
     }
