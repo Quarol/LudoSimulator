@@ -32,3 +32,14 @@ test {
 application {
     mainClass = 'pl.pwr.ludoSimulator.application.Application'
 }
+
+jar {
+    from {
+        (configurations.runtimeClasspath).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    manifest {
+        attributes 'Main-Class': 'pl.pwr.ludo.simulator.application.Application'
+    }
+}
