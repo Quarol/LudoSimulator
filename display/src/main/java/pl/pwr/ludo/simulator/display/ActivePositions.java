@@ -13,13 +13,13 @@ public class ActivePositions {
     private static final int MIN_POSITION = 1;
     private static final int MAX_POSITION = 5;
     public ActivePositions() {
-        this.generatePositions(new DisplayPosition(0,4), new DisplayPosition(10, 0));
-        this.generatePositions(new DisplayPosition(12,0), new DisplayPosition(20, 5));
-        this.generatePositions(new DisplayPosition(20,6), new DisplayPosition(10, 10));
-        this.generatePositions(new DisplayPosition(8,10), new DisplayPosition(0, 5));
+        this.generateSegment(new DisplayPosition(0,4), new DisplayPosition(10, 0));
+        this.generateSegment(new DisplayPosition(12,0), new DisplayPosition(20, 5));
+        this.generateSegment(new DisplayPosition(20,6), new DisplayPosition(10, 10));
+        this.generateSegment(new DisplayPosition(8,10), new DisplayPosition(0, 5));
     }
 
-    private void generatePositions(DisplayPosition player1, DisplayPosition player2) {
+    private void generateSegment(DisplayPosition player1, DisplayPosition player2) {
         int x = player1.x();
         int y = player1.y();
         positions.add(new DisplayPosition(x, y));
@@ -27,11 +27,11 @@ public class ActivePositions {
         List<DisplayPosition> positionsToAdd;
         if (x < player2.x() && y > player2.y()) {
 
-            positionsToAdd =  loop(x, MIN_POSITION, MAX_POSITION-1, 1,
+            positionsToAdd =  generatePositions(x, MIN_POSITION, MAX_POSITION-1, 1,
                     y, 0, 0, 0);
             positions.addAll(positionsToAdd);
 
-            positionsToAdd = loop(x, MAX_POSITION-1, MAX_POSITION-1, 0,
+            positionsToAdd = generatePositions(x, MAX_POSITION-1, MAX_POSITION-1, 0,
                     y, -(MAX_POSITION-1), -MIN_POSITION, 1);
             Collections.reverse(positionsToAdd);
             positions.addAll(positionsToAdd);
@@ -41,11 +41,11 @@ public class ActivePositions {
         }
         if (x < player2.x() && y < player2.y()) {
 
-            positionsToAdd = loop(x, 0, 0, 0,
+            positionsToAdd = generatePositions(x, 0, 0, 0,
                     y, MIN_POSITION, MAX_POSITION-1, 1);
             positions.addAll(positionsToAdd);
 
-            positionsToAdd = loop(x, MIN_POSITION, MAX_POSITION-1, 1,
+            positionsToAdd = generatePositions(x, MIN_POSITION, MAX_POSITION-1, 1,
                     y, MAX_POSITION-1, MAX_POSITION-1, 0);
             positions.addAll(positionsToAdd);
 
@@ -54,12 +54,12 @@ public class ActivePositions {
         }
         if (x > player2.x() && y < player2.y()) {
 
-            positionsToAdd = loop(x, -(MAX_POSITION-1), -MIN_POSITION, 1,
+            positionsToAdd = generatePositions(x, -(MAX_POSITION-1), -MIN_POSITION, 1,
                     y, 0, 0, 0);
             Collections.reverse(positionsToAdd);
             positions.addAll(positionsToAdd);
 
-            positionsToAdd = loop(x, -(MAX_POSITION-1), -(MAX_POSITION-1), 0,
+            positionsToAdd = generatePositions(x, -(MAX_POSITION-1), -(MAX_POSITION-1), 0,
                     y, MIN_POSITION, MAX_POSITION-1, 1);
             positions.addAll(positionsToAdd);
 
@@ -68,12 +68,12 @@ public class ActivePositions {
         }
         if (x > player2.x() && y > player2.y()) {
 
-            positionsToAdd = loop(x, 0, 0, 0,
+            positionsToAdd = generatePositions(x, 0, 0, 0,
                     y, -(MAX_POSITION-1), -MIN_POSITION, 1);
             Collections.reverse(positionsToAdd);
             positions.addAll(positionsToAdd);
 
-            positionsToAdd = loop(x, -(MAX_POSITION-1), -MIN_POSITION, 1,
+            positionsToAdd = generatePositions(x, -(MAX_POSITION-1), -MIN_POSITION, 1,
                     y, -(MAX_POSITION-1), -(MAX_POSITION-1), 0);
             Collections.reverse(positionsToAdd);
             positions.addAll(positionsToAdd);
@@ -83,7 +83,7 @@ public class ActivePositions {
         }
     }
 
-    private List<DisplayPosition> loop(int x, int minX, int maxX, int xInterval,
+    private List<DisplayPosition> generatePositions(int x, int minX, int maxX, int xInterval,
                                       int y, int minY, int maxY, int yInterval) {
         List<DisplayPosition> displayPositions = new ArrayList<>();
 
