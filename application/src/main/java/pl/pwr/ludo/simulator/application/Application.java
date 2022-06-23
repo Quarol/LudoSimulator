@@ -5,18 +5,14 @@ import pl.pwr.ludo.simulator.logic.*;
 import pl.pwr.ludo.simulator.logic.actions.*;
 import pl.pwr.ludo.simulator.simulation.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class Application {
     public static void main(String[] args)  {
         int nrOfPLayers = getNumberOfPlayers();
 
-        List<Action> actions = Arrays.stream(Actions.values())
-                .flatMap(action -> Stream.of(action.get()))
-                .toList();
+        List<Action> actions = Actions.getAll();
         Board board = new BoardInitializer(nrOfPLayers).initialize();
         Display display = new Display(board);
         Simulation simulation = new Simulation(board, actions, new Callback(display));
