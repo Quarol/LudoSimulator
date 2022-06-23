@@ -30,5 +30,5 @@ test {
     useJUnitPlatform()
 }
 application {
-    mainClass = 'pl.pwr.ludoSimulator.application.Application'
+    mainClass = 'pl.pwr.ludo.simulator.application.Application'
 }
